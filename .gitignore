@@ -1,0 +1,33 @@
+# Archivos compilados
+*.class
+
+# Archivos de log
+*.log
+
+# Archivos generados por Eclipse
+*.launch
+.settings/
+.project
+.classpath
+
+# Archivos de construcción comunes
+bin/
+build/
+
+# Archivos de paquetes
+*.jar
+*.war
+*.ear
+
+# Archivos temporales
+*.tmp
+*.bak
+*.swp
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de error de la JVM
+hs_err_pid*
+replay_pid*
