@@ -1,7 +1,9 @@
-package recitales;
+package artistas;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import recitales.Banda;
 
 public class ArtistaInvitado extends Artista {
 	private int maxCanciones;
@@ -35,7 +37,7 @@ public class ArtistaInvitado extends Artista {
 	
 	public boolean tieneDescuento() {
 		
-		for (Banda banda : bandas) {
+   		for (Banda banda : bandas) {
 			for (Artista integrante : banda.getIntegrantes()) {
 				if(integrante.esBase())
 				{

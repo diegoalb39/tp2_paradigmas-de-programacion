@@ -12,6 +12,7 @@ public class Menu {
 
     public void mostrar() {
         int opcion;
+        int opc2;
         do {
         	 System.out.println("=== MENÚ PRINCIPAL ===");
 	            System.out.println("1. Ver roles faltantes de una canción");
@@ -29,15 +30,20 @@ public class Menu {
 
 	            switch (opcion) {
 	                case 1 -> {
-	                recital.verRolesFaltantesCancion();
+	                System.out.println("\n Elija una cancion: \n "+recital.getCanciones());
+	                opc2 = scanner.nextInt();
+	                int rolesqFaltan= recital.verRolesFaltantesCancion(opc2-1);
+	                System.out.println("Faltan "+ rolesqFaltan + " roles en la cancion " + opc2);
 	                scanner.nextLine();
 	                }
-	                //case 2 -> servicio.verRolesFaltantesRecital();
-	                //case 3 -> servicio.contratarParaCancion();
-	                //case 4 -> servicio.contratarParaTodas();
-	                //case 5 -> servicio.entrenarArtista();
-	                //case 6 -> servicio.listarArtistasContratados();
-	                //case 7 -> servicio.listarCanciones();
+	                case 2 ->{
+	                	System.out.println("Faltan "+recital.rolesFaltantesEnTodas()+" en todas las canciones.");
+	                }
+	                //case 3 -> 
+	                //case 4 -> 
+	                //case 5 -> 
+	                //case 6 -> 
+	                //case 7 -> 
 	                case 0 -> System.out.println("Saliendo del sistema...");
 	                default -> System.out.println("Opción inválida");
 	            }

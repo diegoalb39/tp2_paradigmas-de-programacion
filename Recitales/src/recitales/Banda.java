@@ -1,7 +1,9 @@
 package recitales;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.List;
+
+import artistas.Artista;
 
 public class Banda {
 	private String nombre;
