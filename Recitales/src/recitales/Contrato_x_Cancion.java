@@ -37,5 +37,12 @@ public class Contrato_x_Cancion {
 	}
 
 
+	@Override
+	public String toString() {
+		return "Contrato_x_Cancion [artista=" + artista + ", cancion=" + cancion + ", costo=" + costo + ", rol=" + rol
+				+ "]";
+	}
+
+
 	
 }

@@ -1,4 +1,5 @@
 package recitales;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Menu {
@@ -32,12 +33,13 @@ public class Menu {
 	                case 1 -> {
 	                System.out.println("\n Elija una cancion: \n "+recital.getCanciones());
 	                opc2 = scanner.nextInt();
-	                int rolesqFaltan= recital.verRolesFaltantesCancion(opc2-1);
-	                System.out.println("Faltan "+ rolesqFaltan + " roles en la cancion " + opc2);
+	                Map<String,Integer> rolesqFaltan= recital.rolesFaltantesCancionCantidad(opc2-1);
+	                System.out.println("En la cancion " + opc2 +" faltan: ");
+	                rolesqFaltan.forEach((titulo, cantidad) -> System.out.println("Titulo: "+titulo+" Cantidad: "+cantidad));
 	                scanner.nextLine();
 	                }
 	                case 2 ->{
-	                	System.out.println("Faltan "+recital.rolesFaltantesEnTodas()+" en todas las canciones.");
+	                	System.out.println("Roles que faltan "+recital.rolesFaltantesEnTodas()+" en todas las canciones.");
 	                }
 	                //case 3 -> 
 	                //case 4 -> 

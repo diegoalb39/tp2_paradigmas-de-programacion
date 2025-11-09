@@ -2,24 +2,31 @@ package recitales;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import artistas.Artista;
 
 public class Recital {
 	private String nombre;
-	private List<Cancion> canciones = new ArrayList <Cancion>();
-	private List<Artista> artistas = new ArrayList <Artista>();
+	private List<Cancion> canciones;
+	private List<Artista> artistas;
 	
 	
-	public Recital(String nombre, List<Cancion> canciones) {
+	public Recital(String nombre, List<Cancion> canciones, List<Artista> artistas) {
 		this.nombre = nombre;
 		this.canciones = canciones;
+		this.artistas= artistas;
 	}
 	
-	
-	public int verRolesFaltantesCancion(int indice) {
+//	¿Qué roles (con cantidad) me faltan para tocar una canción X del recital?
+	public int cuantosRolesFaltanCancion(int indice) {
 		return canciones.get(indice).rolesFaltantes();
 	}
+	
+	public Map<String,Integer> rolesFaltantesCancionCantidad(int indice){
+		return canciones.get(indice).rolesFaltantesConCantidad();
+	}
+	
 	
 	public String getCanciones() {
 		String titulos="";

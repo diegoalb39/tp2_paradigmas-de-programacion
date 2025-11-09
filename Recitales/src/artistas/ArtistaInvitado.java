@@ -8,7 +8,7 @@ import recitales.Banda;
 public class ArtistaInvitado extends Artista {
 	private int maxCanciones;
 	
-	public ArtistaInvitado(String nombre, double costo, int maxCanciones, List<String> roles, List<Banda> bandas) {
+	public ArtistaInvitado(String nombre, List<String> roles, List<Banda> bandas, double costo, int maxCanciones) {
 		super(nombre, roles, bandas);
 		this.costoBase= costo;
 		this.maxCanciones=maxCanciones;
@@ -50,10 +50,8 @@ public class ArtistaInvitado extends Artista {
 	
 	public boolean getDisponibilidad() {
 		int cantDisp= maxCanciones-contratos.size();
-		if(cantDisp==0)
-			return true;
-		else
-			return false;
+		return cantDisp!=0;
+			
 	}
 	
 	

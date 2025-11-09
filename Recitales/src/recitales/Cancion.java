@@ -1,7 +1,10 @@
 package recitales;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import artistas.Artista;
 
@@ -22,6 +25,8 @@ public class Cancion {
 		Contrato_x_Cancion contratoNuevo = new Contrato_x_Cancion(artista,this,rol);
 		this.contratos.add(contratoNuevo);	
 		artista.agregarContrato(contratoNuevo);
+		System.out.println(contratoNuevo.toString());
+		
 			return true;		
 	}
 	
@@ -51,18 +56,44 @@ public class Cancion {
 				cantRol++;
 			}
 		}
-
 			return cantContr<cantRol;
 	}
 	
 	public int rolesFaltantes() {
-			
 			return rol.size()-contratos.size();
+	}
+	
+//	¿Qué roles (con cantidad) me faltan para tocar una canción X del recital?
+	public Map<String,Integer> rolesFaltantesConCantidad(){
+		Map<String,Integer> rolesconcantidad= new HashMap<String, Integer>();
+		int cantidadRol=0, cantidadContrato=0;
+		
+		for (String rold : rol) {
+			if(!rolesconcantidad.containsKey(rold))
+			{	
+				cantidadRol=Collections.frequency(rol, rold);
+				
+				cantidadContrato=0;
+				for (Contrato_x_Cancion contrato : contratos) {
+					if(contrato.getRol().equals(rold)) {
+						cantidadContrato++;
+					}
+				}				
+				rolesconcantidad.put(rold,cantidadRol - cantidadContrato);
+			}
+		}
+				
+		return rolesconcantidad;
 	}
 	
 	
 	public String getTitulo() {
 		return titulo;
+	}
+
+	@Override
+	public String toString() {
+		return "Cancion [titulo=" + titulo + "]";
 	}
 	
 	

@@ -45,12 +45,13 @@ public class Artista {
 	public void agregarContrato(Contrato_x_Cancion contrato) {
 		this.contratos.add(contrato);
 	}
+
+	@Override
+	public String toString() {
+		return "Artista [nombre=" + nombre + ", costoBase=" + costoBase + "]";
+	}
 	
 	
-//	public boolean perteneceACancion(Cancion cancion) {
-//		if(this.contratos.)
-//		return true;
-//	}
-	
+
 	
 }
