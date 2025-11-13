@@ -18,6 +18,8 @@ build/
 *.jar
 *.war
 *.ear
+# Excepto los que están en lib/
+!lib/*.jar
 
 # Archivos temporales
 *.tmp
