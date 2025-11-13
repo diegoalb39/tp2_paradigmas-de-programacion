@@ -8,6 +8,9 @@ import recitales.Banda;
 public class ArtistaInvitado extends Artista {
 	private int maxCanciones;
 	
+	public ArtistaInvitado() {
+	}
+	
 	public ArtistaInvitado(String nombre, List<String> roles, List<Banda> bandas, double costo, int maxCanciones) {
 		super(nombre, roles, bandas);
 		this.costoBase= costo;

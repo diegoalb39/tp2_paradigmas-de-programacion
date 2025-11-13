@@ -10,12 +10,15 @@ import artistas.Artista;
 
 public class Cancion {
 	private String titulo;
-	private List<String> rol;
+	private List<String> roles;
 	private List<Contrato_x_Cancion> contratos = new ArrayList <Contrato_x_Cancion>();
+	
+	public Cancion() {
+	} 
 	
 	public Cancion(String titulo, List<String> rol) {
 		this.titulo = titulo;
-		this.rol = rol;
+		this.roles = rol;
 	}
 	
 	public boolean contratarArtista(Artista artista, String rol) {
@@ -31,7 +34,7 @@ public class Cancion {
 	}
 	
 	private boolean cancionContieneRol(String rol) {
-		return this.rol.contains(rol);
+		return this.roles.contains(rol);
 	}
 	
 	private boolean cancionTieneArtista(Artista artista) {
@@ -51,7 +54,7 @@ public class Cancion {
 	        }
 	    }
 		
-		for (String rold : this.rol) {
+		for (String rold : this.roles) {
 			if(rold.equals(rol)) {
 				cantRol++;
 			}
@@ -60,7 +63,7 @@ public class Cancion {
 	}
 	
 	public int rolesFaltantes() {
-			return rol.size()-contratos.size();
+			return roles.size()-contratos.size();
 	}
 	
 //	¿Qué roles (con cantidad) me faltan para tocar una canción X del recital?
@@ -68,10 +71,10 @@ public class Cancion {
 		Map<String,Integer> rolesconcantidad= new HashMap<String, Integer>();
 		int cantidadRol=0, cantidadContrato=0;
 		
-		for (String rold : rol) {
+		for (String rold : roles) {
 			if(!rolesconcantidad.containsKey(rold))
 			{	
-				cantidadRol=Collections.frequency(rol, rold);
+				cantidadRol=Collections.frequency(roles, rold);
 				
 				cantidadContrato=0;
 				for (Contrato_x_Cancion contrato : contratos) {

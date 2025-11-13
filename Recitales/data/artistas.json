@@ -8,7 +8,7 @@
       "bandas": [
          "Queen"
       ],
-      "costo": 0,
+      "costoBase": 0,
       "maxCanciones": 100
    },
    {
@@ -20,7 +20,7 @@
       "bandas": [
          "Queen"
       ],
-      "costo": 0,
+      "costoBase": 0,
       "maxCanciones": 100
    },
    {
@@ -31,7 +31,7 @@
       "bandas": [
          "Queen"
       ],
-      "costo": 0,
+      "costoBase": 0,
       "maxCanciones": 100
    },
    {
@@ -43,7 +43,7 @@
          "Wham!",
          "George Michael"
       ],
-      "costo": 1000,
+      "costoBase": 1000,
       "maxCanciones": 3
    },
    {
@@ -55,7 +55,7 @@
       "bandas": [
          "Elton John Band"
       ],
-      "costo": 1200,
+      "costoBase": 1200,
       "maxCanciones": 2
    },
    {
@@ -67,7 +67,7 @@
          "Tin Machine",
          "David Bowie"
       ],
-      "costo": 1500,
+      "costoBase": 1500,
       "maxCanciones": 2
    },
    {
@@ -78,7 +78,7 @@
       "bandas": [
          "Eurythmics"
       ],
-      "costo": 900,
+      "costoBase": 900,
       "maxCanciones": 2
    },
    {
@@ -89,7 +89,7 @@
       "bandas": [
          "Lisa Stansfield"
       ],
-      "costo": 800,
+      "costoBase": 800,
       "maxCanciones": 2
    }
 ]

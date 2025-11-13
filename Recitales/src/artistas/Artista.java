@@ -13,6 +13,9 @@ public class Artista {
 	protected List<Banda>bandas;
 	protected List<Contrato_x_Cancion>contratos = new ArrayList<Contrato_x_Cancion>();
 	
+	public Artista() {//jackson necesita contructores vacios
+	}
+
 	public Artista(String nombre, List<String> roles, List<Banda> bandas) {
 		this.nombre=nombre;
 		costoBase=0;
