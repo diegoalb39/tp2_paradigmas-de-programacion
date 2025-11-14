@@ -26,13 +26,13 @@ public class JsonIO {
 		});
 	}
 
-	public static Set<String> cargarArtistasBase(Path path) throws IOException {
+	public static List<String> cargarArtistasBase(Path path) throws IOException {
 		String json = Files.readString(path, StandardCharsets.UTF_8);
-		return mapper.readValue(json, new TypeReference<Set<String>>() {
+		return mapper.readValue(json, new TypeReference<List<String>>() {
 		});
 	}
 
-	//print para exportar resultados
+	//print para exportar resultados, TODO testear
 	public static <T> void guardar(Path path, T objeto) throws IOException {
 		String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(objeto);
 		Files.writeString(path, json, StandardCharsets.UTF_8);
