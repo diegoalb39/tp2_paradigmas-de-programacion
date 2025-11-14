@@ -24,8 +24,44 @@ public class Artista {
 
 	}
 	
-	public double getCosto() {
+	public String getNombre() {
+		return nombre;
+	}
+
+	public double getCostoBase() {
 		return this.costoBase;
+	}
+	
+	public List<String> getRoles() {
+		return roles;
+	}
+
+	public List<Banda> getBandas() {
+		return bandas;
+	}
+
+	public List<Contrato_x_Cancion> getContratos() {
+		return contratos;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public void setCostoBase(double costoBase) {
+		this.costoBase = costoBase;
+	}
+
+	public void setRoles(List<String> roles) {
+		this.roles = roles;
+	}
+
+	public void setBandas(List<Banda> bandas) {
+		this.bandas = bandas;
+	}
+
+	public void setContratos(List<Contrato_x_Cancion> contratos) {
+		this.contratos = contratos;
 	}
 	
 	public boolean esBase() {

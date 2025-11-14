@@ -2,15 +2,10 @@ package io;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import artistas.Artista;
-import recitales.Cancion;
-
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-//import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 public class JsonIO {
@@ -19,15 +14,15 @@ public class JsonIO {
 	private JsonIO() {
 	}
 
-	public static List<Artista> cargarArtistas(Path path) throws IOException {
+	public static List<ArtistaJson> cargarArtistas(Path path) throws IOException {
 		String json = Files.readString(path, StandardCharsets.UTF_8);
-		return mapper.readValue(json, new TypeReference<List<Artista>>() {
+		return mapper.readValue(json, new TypeReference<List<ArtistaJson>>() {
 		});
 	}
 
-	public static List<Cancion> cargarCanciones(Path path) throws IOException {
+	public static List<CancionJson> cargarCanciones(Path path) throws IOException {
 		String json = Files.readString(path, StandardCharsets.UTF_8);
-		return mapper.readValue(json, new TypeReference<List<Cancion>>() {
+		return mapper.readValue(json, new TypeReference<List<CancionJson>>() {
 		});
 	}
 

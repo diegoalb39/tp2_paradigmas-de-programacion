@@ -12,7 +12,7 @@ public class Contrato_x_Cancion {
 	public Contrato_x_Cancion(Artista artista, Cancion cancion, String rol) {
 		this.artista = artista;
 		this.cancion = cancion;
-		this.costo =artista.getCosto();
+		this.costo =artista.getCostoBase();
 		this.rol=rol;
 	}
 
