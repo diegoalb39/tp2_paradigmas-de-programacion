@@ -46,9 +46,9 @@ public class Menu {
 	                //case 3 -> 
 	                //case 4 -> 
 	                //case 5 -> 
-	                //case 6 -> {
-	                	//listarArtistasContratados();
-	                //}
+	                case 6 -> {
+	                	listarArtistasContratados();
+	                }
 	                //case 7 -> 
 	                case 0 -> System.out.println("Saliendo del sistema...");
 	                default -> System.out.println("Opción inválida");
@@ -59,29 +59,37 @@ public class Menu {
     
 	public void listarArtistasContratados() {
 		double total = 0;
-		boolean primeraVez = true;
 		
 		System.out.println("\n=== LISTA DE ARTISTAS CONTRATADOS ===");
 		System.out.printf("%-20s | %-20s | %-15s | %-10s%n","ARTISTA", "CANCION", "ROL", "COSTO");
 	    System.out.println("----------------------------------------------------------------------------------");
+	    
 		for (Artista a : recital.getArtistas()) {
 			double subtotal = 0;
-			primeraVez = true;
+			boolean primeraVez = true;
 			if(a.tieneContratos()) {
 				for (Contrato_x_Cancion c : a.getContratos()) {
 					if (primeraVez) {
-						System.out.println(a.getNombre() + "|" + c.getCancion() + "|" + c.getRol() + "|$" + c.getCosto());
-						subtotal += c.getCosto();
+						System.out.printf("%-20s | %-20s | %-15s | $%-10.2f%n",
+		                        a.getNombre(),
+		                        c.getCancion().getTitulo(),  
+		                        c.getRol(),
+		                        c.getCosto());
 						primeraVez = false;
 					}
 					else {
-						System.out.println("|" + c.getCancion() + "|" + c.getRol() + "|$" + c.getCosto());
-						subtotal += c.getCosto();
+						System.out.printf("%-20s | %-20s | %-15s | $%-10.2f%n",
+		                        "",
+		                        c.getCancion().getTitulo(),
+		                        c.getRol(),
+		                        c.getCosto()
+		                );
 					}
+					subtotal += c.getCosto();
 				}
-				System.out.println("subTotal: $" + subtotal);
-				total += subtotal;
-					
+				System.out.printf("   Subtotal %-34s $%.2f%n", "", subtotal);
+				System.out.println("----------------------------------------------------------------------------------");
+				total += subtotal;	
 			}	
 		}
 		System.out.println("Total: $" + total);
