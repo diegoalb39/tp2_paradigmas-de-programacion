@@ -3,6 +3,7 @@ package recitales;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
@@ -21,78 +22,103 @@ public class App {
 		List<String> baseNombresJson = JsonIO.cargarArtistasBase(Path.of("data/artistas-discografica.json"));
 		List<CancionJson> cancionesJson = JsonIO.cargarCanciones(Path.of("data/recital.json"));
 		
-		System.out.println("===== ARTISTAS JSON=====");
+		/*System.out.println("===== ARTISTAS =====");
 		for (ArtistaJson a : artistasJson) {
 			System.out.println(a.toString());
 		}
-		System.out.println("===== ARTISTAS BASE JSON =====");
+		System.out.println("===== ARTISTAS BASE =====");
 		for (String s : baseNombresJson) {
 			System.out.println(s);
 		}
-		System.out.println("===== CANCIONES JSON=====");
-		for (CancionJson c : cancionesJson) {
-			System.out.println(c.toString());
-		}
-		
-		List<Cancion> canciones = CancionJson.convertirLista(cancionesJson);
-		
 		System.out.println("===== CANCIONES =====");
-		for (Cancion c : canciones) {
+		for (CancionJson c : cancionesJson) {
 			System.out.println(c.toString());
 		}
 		// ===================================*/
 		
 		//TODO Pasar el contendo de las clases Json a las clases normales
 		
-		/*List<String> roles = new ArrayList<String>();
-		roles.add("Guitarra");
-		roles.add("Armonica");
-		roles.add("Guitarra");
-		roles.add("Voz");
-		roles.add("Voz");
-		roles.add("Acordeon");
-		List<String> roles2 = new ArrayList<String>();
-		roles2.add("Bajo");
-		roles2.add("Guitarra");
-		roles2.add("Voz");
-
-		List<String> roles3 = new ArrayList<String>();
-		roles3.add("Voz");
-
-		Cancion cancion1 = new Cancion("Alla en Tilcara", roles);
-		Cancion cancion2 = new Cancion("Intifada", roles2);
-		Cancion cancion3 = new Cancion("De la cabeza", roles3);
-
-		List<Cancion> canciones = new ArrayList<Cancion>();
-		canciones.add(cancion1);
-		canciones.add(cancion2);
-		canciones.add(cancion3);
-
-		List<Artista> artistas = new ArrayList<>();
+		// === Crear bandas ===
 		List<Banda> bandas = new ArrayList<>();
+		for (String nombreBanda : baseNombresJson) {
+		    bandas.add(new Banda(nombreBanda, new ArrayList<>()));
+		}
 
-		Banda banda1 = new Banda("bandana", artistas);
-		bandas.add(banda1);
 
-		Artista art1 = new Artista("Marco Antonio Solis", roles3, bandas);
-		Artista art2 = new Artista("Leon Gieco", roles2, bandas);
-		ArtistaInvitado artInv = new ArtistaInvitado("Wos", roles, bandas, 100, 1);
-		artistas.add(art1);
-		artistas.add(art2);
+		// === Crear artistas ===
+		List<Artista> artistas = new ArrayList<>();
+		for (ArtistaJson aj : artistasJson) {
+		    artistas.add(convertirAArtista(aj, bandas));
+		}
 
-		artistas.add(artInv);
-		artistas.add(art1);
 
-		System.out.println(cancion1.contratarArtista(art1, "Voz"));
-		System.out.println(cancion1.contratarArtista(art2, "Voz"));
-		System.out.println(cancion1.contratarArtista(artInv, "Voz"));
+		// === Cargar artistas dentro de sus bandas ===
+		for (Banda banda : bandas) {
+		    for (Artista artista : artistas) {
+		        if (artista.getBandas().stream()
+		                .anyMatch(b -> b.getNombre().equalsIgnoreCase(banda.getNombre()))) {
 
-		Recital recital = new Recital("uno", canciones, artistas);
+		            banda.getIntegrantes().add(artista);
+		        }
+		    }
+		}
 
+
+		// === Crear canciones ===
+		List<Cancion> canciones = new ArrayList<>();
+		for (CancionJson cj : cancionesJson) {
+		    canciones.add(convertirACancion(cj));
+		}
+
+
+		// === Crear recital ===
+		Recital recital = new Recital("Recital Principal", canciones, artistas);
+		
+		for(int i=0;i<artistas.size();i++) {
+			System.out.println(artistas.get(i));
+		}
+		
+		// === Mostrar menú ===
 		Scanner scanner = new Scanner(System.in);
 		Menu menu = new Menu(recital, scanner);
-		menu.mostrar();*/
-		
+		menu.mostrar();
 	}
 
+	private static Artista convertirAArtista(ArtistaJson json, List<Banda> bandasReales) {
+	    // Encontrar todas las bandas reales que coincidan con las del JSON
+	    List<Banda> bandasDelArtista = new ArrayList<>();
+	    for (String nombreBanda : json.getBandas()) {
+	        bandasReales.stream()
+	            .filter(b -> b.getNombre().equalsIgnoreCase(nombreBanda))
+	            .findFirst()
+	            .ifPresent(bandasDelArtista::add);
+	    }
+
+	    // Si tiene costo → es ArtistaInvitado
+	    if (json.getCosto() > 0) {
+	        return new ArtistaInvitado(
+	            json.getNombre(),
+	            json.getRoles(),
+	            bandasDelArtista,
+	            json.getCosto(),
+	            json.getMaxCanciones()
+	        );
+	    }
+
+	    // Si no, es Artista normal
+	    return new Artista(
+	        json.getNombre(),
+	        json.getRoles(),
+	        bandasDelArtista
+	    );
+	}
+	
+	private static Cancion convertirACancion(CancionJson json) {
+	    return new Cancion(
+	        json.getTitulo(),
+	        json.getRolesRequeridos()
+	    );
+	}
+	
+	
 }
