@@ -91,8 +91,8 @@ public class App {
 
 		Scanner scanner = new Scanner(System.in);
 		Menu menu = new Menu(recital, scanner);
-		menu.mostrar();
-		*/
+		menu.mostrar();*/
+		
 	}
 
 }

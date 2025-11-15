@@ -90,7 +90,13 @@ public class Artista {
 		return "Artista [nombre=" + nombre + ", costoBase=" + costoBase + "]";
 	}
 	
-	
+	//PUNTO 6
+	public boolean tieneContratos() {
+		if(this.getContratos().size() > 0) {
+			return true;
+		}
+		return false;
+	}
 
 	
 }

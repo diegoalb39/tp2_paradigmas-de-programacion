@@ -2,6 +2,8 @@ package recitales;
 import java.util.Map;
 import java.util.Scanner;
 
+import artistas.Artista;
+
 public class Menu {
 	private Recital recital;
     private Scanner scanner;
@@ -44,7 +46,9 @@ public class Menu {
 	                //case 3 -> 
 	                //case 4 -> 
 	                //case 5 -> 
-	                //case 6 -> 
+	                //case 6 -> {
+	                	//listarArtistasContratados();
+	                //}
 	                //case 7 -> 
 	                case 0 -> System.out.println("Saliendo del sistema...");
 	                default -> System.out.println("Opción inválida");
@@ -52,4 +56,34 @@ public class Menu {
 
         } while (opcion != 0);
     }
+    
+	public void listarArtistasContratados() {
+		double total = 0;
+		boolean primeraVez = true;
+		
+		System.out.println("\n=== LISTA DE ARTISTAS CONTRATADOS ===");
+		System.out.printf("%-20s | %-20s | %-15s | %-10s%n","ARTISTA", "CANCION", "ROL", "COSTO");
+	    System.out.println("----------------------------------------------------------------------------------");
+		for (Artista a : recital.getArtistas()) {
+			double subtotal = 0;
+			primeraVez = true;
+			if(a.tieneContratos()) {
+				for (Contrato_x_Cancion c : a.getContratos()) {
+					if (primeraVez) {
+						System.out.println(a.getNombre() + "|" + c.getCancion() + "|" + c.getRol() + "|$" + c.getCosto());
+						subtotal += c.getCosto();
+						primeraVez = false;
+					}
+					else {
+						System.out.println("|" + c.getCancion() + "|" + c.getRol() + "|$" + c.getCosto());
+						subtotal += c.getCosto();
+					}
+				}
+				System.out.println("subTotal: $" + subtotal);
+				total += subtotal;
+					
+			}	
+		}
+		System.out.println("Total: $" + total);
+	}
 }

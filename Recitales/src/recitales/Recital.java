@@ -1,6 +1,7 @@
 package recitales;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,7 +19,13 @@ public class Recital {
 		this.artistas= artistas;
 	}
 	
-//	¿Qué roles (con cantidad) me faltan para tocar una canción X del recital?
+	
+	
+	public List<Artista> getArtistas() {
+		return artistas;
+	}
+
+	//	¿Qué roles (con cantidad) me faltan para tocar una canción X del recital?
 	public int cuantosRolesFaltanCancion(int indice) {
 		return canciones.get(indice).rolesFaltantes();
 	}
@@ -48,6 +55,10 @@ public class Recital {
 		return cant;
 	
 	}
+	
+	
+	
+
 	
 	
 	

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import recitales.Banda;
+import recitales.Contrato_x_Cancion;
 
 public class ArtistaInvitado extends Artista {
 	private int maxCanciones;
@@ -56,6 +57,7 @@ public class ArtistaInvitado extends Artista {
 		return cantDisp!=0;
 			
 	}
+	
 	
 	
 }
