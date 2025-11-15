@@ -16,28 +16,35 @@ import io.CancionJson;
 public class App {
 
 	public static void main(String[] args) throws IOException {
-		/*// ====== IMPORTACION DE ARCHIVOS ====
+		// ====== IMPORTACION DE ARCHIVOS ====
 		List<ArtistaJson> artistasJson = JsonIO.cargarArtistas(Path.of("data/artistas.json"));
 		List<String> baseNombresJson = JsonIO.cargarArtistasBase(Path.of("data/artistas-discografica.json"));
 		List<CancionJson> cancionesJson = JsonIO.cargarCanciones(Path.of("data/recital.json"));
 		
-		System.out.println("===== ARTISTAS =====");
+		System.out.println("===== ARTISTAS JSON=====");
 		for (ArtistaJson a : artistasJson) {
 			System.out.println(a.toString());
 		}
-		System.out.println("===== ARTISTAS BASE =====");
+		System.out.println("===== ARTISTAS BASE JSON =====");
 		for (String s : baseNombresJson) {
 			System.out.println(s);
 		}
-		System.out.println("===== CANCIONES =====");
+		System.out.println("===== CANCIONES JSON=====");
 		for (CancionJson c : cancionesJson) {
+			System.out.println(c.toString());
+		}
+		
+		List<Cancion> canciones = CancionJson.convertirLista(cancionesJson);
+		
+		System.out.println("===== CANCIONES =====");
+		for (Cancion c : canciones) {
 			System.out.println(c.toString());
 		}
 		// ===================================*/
 		
 		//TODO Pasar el contendo de las clases Json a las clases normales
 		
-		List<String> roles = new ArrayList<String>();
+		/*List<String> roles = new ArrayList<String>();
 		roles.add("Guitarra");
 		roles.add("Armonica");
 		roles.add("Guitarra");
@@ -85,7 +92,7 @@ public class App {
 		Scanner scanner = new Scanner(System.in);
 		Menu menu = new Menu(recital, scanner);
 		menu.mostrar();
-
+		*/
 	}
 
 }

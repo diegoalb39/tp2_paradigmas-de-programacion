@@ -1,6 +1,8 @@
 package io;
 
+import java.util.ArrayList;
 import java.util.List;
+import recitales.Cancion;
 
 public class CancionJson {
 	private String titulo;
@@ -29,4 +31,22 @@ public class CancionJson {
 	public String toString() {
 		return "Cancion{" + titulo + ", rolesRequeridos=" + rolesRequeridos + "}";
 	}
+	
+	public Cancion toCancion() {
+		Cancion cancion = new Cancion();
+		cancion.setTitulo(this.getTitulo());
+		cancion.setRoles(this.getRolesRequeridos());
+		
+		return cancion;
+	}
+// Transforma la lista CancionJson importada a una lista de Cancion, no incluye contratos 
+	public static List<Cancion> convertirLista(List<CancionJson> listaJson){
+		List<Cancion> listaCanciones = new ArrayList<>();
+		for (CancionJson l : listaJson) {
+			listaCanciones.add(l.toCancion());
+		}
+		return listaCanciones;
+	}
+		
 }
+

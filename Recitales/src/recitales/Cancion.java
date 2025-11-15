@@ -10,17 +10,17 @@ import artistas.Artista;
 
 public class Cancion {
 	private String titulo;
-	private List<String> roles;
+	private List<String> roles;//TODO deberia ser enum?
 	private List<Contrato_x_Cancion> contratos = new ArrayList <Contrato_x_Cancion>();
-	
-	public Cancion() {
-	} 
 	
 	public Cancion(String titulo, List<String> rol) {
 		this.titulo = titulo;
 		this.roles = rol;
 	}
 	
+	public Cancion() {
+	}
+
 	public boolean contratarArtista(Artista artista, String rol) {
 		if( !this.cancionContieneRol(rol) || !artista.getDisponibilidad() || !artista.contieneRol(rol) || this.cancionTieneArtista(artista) || !this.rolEstaDisponible(rol) ) {
 			return false;
@@ -94,12 +94,29 @@ public class Cancion {
 		return titulo;
 	}
 
+	public List<String> getRoles() {
+		return roles;
+	}
+
+	public List<Contrato_x_Cancion> getContratos() {
+		return contratos;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
+	public void setRoles(List<String> roles) {
+		this.roles = roles;
+	}
+
+	public void setContratos(List<Contrato_x_Cancion> contratos) {
+		this.contratos = contratos;
+	}
+
 	@Override
 	public String toString() {
-		return "Cancion [titulo=" + titulo + "]";
+		return "Cancion [titulo=" + titulo + ", roles=" + roles + ", contratos=" + contratos + "]";
 	}
-	
-	
-	
 	
 }
