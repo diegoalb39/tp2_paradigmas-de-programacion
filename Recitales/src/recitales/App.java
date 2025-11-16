@@ -52,13 +52,12 @@ public class App {
 				}
 			}
 		}
-		System.out.println(bandas);
+
 		// === Crear artistas ===
 		List<Artista> artistas = new ArrayList<>();
 		for (ArtistaJson aj : artistasJson) {
 		    artistas.add(convertirAArtista(aj, bandas));
 		}
-
 
 		// === Cargar artistas dentro de sus bandas ===
 		for (Banda banda : bandas) {
@@ -71,14 +70,12 @@ public class App {
 		    }
 		}
 
-
 		// === Crear canciones ===
 		List<Cancion> canciones = new ArrayList<>();
 		for (CancionJson cj : cancionesJson) {
 		    canciones.add(convertirACancion(cj));
 		}
 		//bandas prueba
-		//System.out.println(bandas);
 		System.out.println(artistas.get(7).getBandas());
 		System.out.println(artistas.get(0).getBandas());
 //		//CONTRATO FEO
