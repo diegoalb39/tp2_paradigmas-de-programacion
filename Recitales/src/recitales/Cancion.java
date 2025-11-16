@@ -28,9 +28,8 @@ public class Cancion {
 		Contrato_x_Cancion contratoNuevo = new Contrato_x_Cancion(artista,this,rol);
 		this.contratos.add(contratoNuevo);	
 		artista.agregarContrato(contratoNuevo);
-		System.out.println(contratoNuevo.toString());
-		
-			return true;		
+
+		return true;		
 	}
 	
 	private boolean cancionContieneRol(String rol) {

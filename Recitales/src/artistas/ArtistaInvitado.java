@@ -41,17 +41,14 @@ public class ArtistaInvitado extends Artista {
 	public boolean tieneDescuento() {
 		
    		for (Banda banda : bandas) {
-   			System.out.println(banda);
 			for (Artista integrante : banda.getIntegrantes()) {
 				if(integrante.esBase())
 				{
-					System.out.println("SI comparte banda" + banda);
 					return true;
 				}
 			}  
 		}
-   
-   		System.out.println("sin descuento");
+
 		return false;
 	}
 	

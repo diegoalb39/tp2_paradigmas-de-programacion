@@ -75,9 +75,7 @@ public class App {
 		for (CancionJson cj : cancionesJson) {
 		    canciones.add(convertirACancion(cj));
 		}
-		//bandas prueba
-		System.out.println(artistas.get(7).getBandas());
-		System.out.println(artistas.get(0).getBandas());
+
 //		//CONTRATO FEO
 		canciones.get(0).contratarArtista(artistas.get(0), "guitarra eléctrica");
 		canciones.get(1).contratarArtista(artistas.get(4), "voz principal");
@@ -86,7 +84,7 @@ public class App {
 		canciones.get(0).contratarArtista(artistas.get(2), "bajo");
 		canciones.get(0).contratarArtista(artistas.get(7), "voz principal");
 		
-		System.out.println(artistas.get(7).getCostoBase());
+		//System.out.println(artistas.get(7).getCostoBase());
 		
 		//----------
 
@@ -94,9 +92,9 @@ public class App {
 		// === Crear recital ===
 		Recital recital = new Recital("Recital Principal", canciones, artistas);
 		
-		for(int i=0;i<artistas.size();i++) {
-			System.out.println(artistas.get(i));
-		}
+//		for(int i=0;i<artistas.size();i++) {
+//			System.out.println(artistas.get(i));
+//		}
 		
 		// === Mostrar menú ===
 		Scanner scanner = new Scanner(System.in);
