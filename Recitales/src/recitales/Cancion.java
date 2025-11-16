@@ -10,7 +10,7 @@ import artistas.Artista;
 
 public class Cancion {
 	private String titulo;
-	private List<String> roles;//TODO deberia ser enum?
+	private List<String> roles;
 	private List<Contrato_x_Cancion> contratos = new ArrayList <Contrato_x_Cancion>();
 	
 	public Cancion(String titulo, List<String> rol) {
@@ -118,5 +118,25 @@ public class Cancion {
 	public String toString() {
 		return "Cancion [titulo=" + titulo + ", roles=" + roles + ", contratos=" + contratos + "]";
 	}
+	
+	//PUNTO 7
+	public double calcularCosto() {
+		double total = 0;
+		for (Contrato_x_Cancion c : contratos) {
+			total += c.getCosto();
+		}
+		return total;
+	}
+	// true si no falta ningún rol
+	public boolean tieneTodosLosRolesCubiertos() {
+		Map<String, Integer> faltantes = this.rolesFaltantesConCantidad();
+		for (Integer cant : faltantes.values()) {
+			if(cant > 0) {
+				return false;// si falta al menos 1 de algún rol -> INCOMPLETA
+			}
+		}
+		return true;
+	}
+	
 	
 }

@@ -35,7 +35,7 @@ public class Recital {
 	}
 	
 	
-	public String getCanciones() {
+	public String getTituloCanciones() {
 		String titulos="";
 		
 		for (int i=0; i< canciones.size() ; i++) {
@@ -46,6 +46,11 @@ public class Recital {
 		
 		return titulos;
 	}
+	
+	public List<Cancion> getCanciones() {
+		return canciones;
+	}
+	
 	
 	public int rolesFaltantesEnTodas() {
 		int cant=0;

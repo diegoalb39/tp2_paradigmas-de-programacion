@@ -33,7 +33,7 @@ public class Menu {
 
 	            switch (opcion) {
 	                case 1 -> {
-	                System.out.println("\n Elija una cancion: \n "+recital.getCanciones());
+	                System.out.println("\n Elija una cancion: \n "+recital.getTituloCanciones());
 	                opc2 = scanner.nextInt();
 	                Map<String,Integer> rolesqFaltan= recital.rolesFaltantesCancionCantidad(opc2-1);
 	                System.out.println("En la cancion " + opc2 +" faltan: ");
@@ -49,7 +49,9 @@ public class Menu {
 	                case 6 -> {
 	                	listarArtistasContratados();
 	                }
-	                //case 7 -> 
+	                case 7 -> {
+	                	listarCancionesConEstados();
+	                }
 	                case 0 -> System.out.println("Saliendo del sistema...");
 	                default -> System.out.println("Opción inválida");
 	            }
@@ -57,6 +59,8 @@ public class Menu {
         } while (opcion != 0);
     }
     
+    
+    //PUNTO 6
 	public void listarArtistasContratados() {
 		double total = 0;
 		
@@ -93,5 +97,43 @@ public class Menu {
 			}	
 		}
 		System.out.println("Total: $" + total);
+	}
+	
+	 //PUNTO 7
+	public void listarCancionesConEstados() {
+		System.out.println("\n=== LISTA DE CANCIONES CON SU ESTADO ===");
+		System.out.printf("%-33s | %-10s | %-10s | %-30s%n","CANCION", "ESTADO", "COSTO", "ROLES FALTANTES");
+	    System.out.println("-------------------------------------------------------------------------------------------");
+	    
+	    for (Cancion cancion : recital.getCanciones()) {
+	    	double costo = cancion.calcularCosto();
+	    	boolean completa = cancion.tieneTodosLosRolesCubiertos();
+	    	Map<String, Integer> faltantes = cancion.rolesFaltantesConCantidad();
+	    	
+	    	String estado = completa ? "COMPLETA" : "INCOMPLETA";
+	    	
+	    	StringBuilder faltantesTexto = new StringBuilder();//texto tipo: "voz principal (1), coro (2)"
+	    	for (Map.Entry<String, Integer> entry : faltantes.entrySet()) {
+	    		String rol = entry.getKey();
+	    		int cant = entry.getValue();
+	    		if (cant > 0) {
+	    			if(faltantesTexto.length() > 0) {
+	    				faltantesTexto.append(", ");
+	    			}
+	    			faltantesTexto.append(rol).append(" (").append(cant).append(")");
+	    		}
+	    	}
+	    	
+	    	if(faltantesTexto.length()==0) {
+	    		faltantesTexto.append("-");
+	    	}
+	    	
+	    	System.out.printf("%-33s | %-10s | $%-9.2f | %-30s%n",
+	                cancion.getTitulo(),
+	                estado,
+	                costo,
+	                faltantesTexto.toString()
+	        );
+	    }
 	}
 }

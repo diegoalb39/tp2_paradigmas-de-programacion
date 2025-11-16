@@ -69,6 +69,11 @@ public class App {
 		for (CancionJson cj : cancionesJson) {
 		    canciones.add(convertirACancion(cj));
 		}
+//		//CONTRATO FEO
+//		canciones.get(0).contratarArtista(artistas.get(0), "guitarra eléctrica");
+//		canciones.get(1).contratarArtista(artistas.get(4), "voz principal");
+//		canciones.get(0).contratarArtista(artistas.get(4), "piano");	
+		//----------
 
 
 		// === Crear recital ===
