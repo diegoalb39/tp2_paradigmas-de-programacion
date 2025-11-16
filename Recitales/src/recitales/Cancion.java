@@ -3,6 +3,7 @@ package recitales;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -138,5 +139,15 @@ public class Cancion {
 		return true;
 	}
 	
-	
+	//2-Bonus
+	public void quitarContratosDe(Artista artista) {
+	// recorro con iterador para poder remover el elemento mientras lo recorro, con un for seria mas dificil
+		Iterator<Contrato_x_Cancion> it = contratos.iterator();
+		while(it.hasNext()) {
+			Contrato_x_Cancion c = it.next();
+			if(c.getArtista().equals(artista)) {
+				it.remove();
+			}
+		}
+	}
 }

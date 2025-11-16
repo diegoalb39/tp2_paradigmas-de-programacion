@@ -1,4 +1,5 @@
 package recitales;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -25,7 +26,8 @@ public class Menu {
 	            System.out.println("5. Entrenar artista");
 	            System.out.println("6. Listar artistas contratados");
 	            System.out.println("7. Listar canciones con su estado");
-	            System.out.println("9. Salir");
+	            System.out.println("8. Quitar Artista del Recital");
+	            System.out.println("0. Salir");
 	            System.out.print("Elija una opción: ");
 
 	            opcion = scanner.nextInt();
@@ -51,6 +53,9 @@ public class Menu {
 	                }
 	                case 7 -> {
 	                	listarCancionesConEstados();
+	                }
+	                case 8 ->{
+	                	opcionArrepentimientoPorIndice();
 	                }
 	                case 0 -> System.out.println("Saliendo del sistema...");
 	                default -> System.out.println("Opción inválida");
@@ -135,5 +140,51 @@ public class Menu {
 	                faltantesTexto.toString()
 	        );
 	    }
+	}
+	//PUNTO 2 BONUS
+	private void mostrarArtistasConIndice() {
+		System.out.println("\n=== ARTISTAS DISPONIBLES ===");
+		
+		List<Artista> artistas = recital.getArtistas();
+		for (int i = 0; i < artistas.size(); i++) {
+			Artista a = artistas.get(i);
+			System.out.printf("%d) %s%n", i + 1, a.getNombre());
+		}
+	}
+	private void mostrarArtistasContratadosConIndice() {// USAR EN opcionArrepentimientoPorIndice si solo se quiere sacar artistas con contrato
+	    System.out.println("\n=== ARTISTAS CON CONTRATOS ===");
+
+	    List<Artista> artistas = recital.getArtistas();
+	    for (int i = 0; i < artistas.size(); i++) {
+	        Artista a = artistas.get(i);
+	        if (a.tieneContratos()) {
+	            System.out.printf("%d) %s%n", i + 1, a.getNombre());
+	        }
+	    }
+	}
+	
+	public void opcionArrepentimientoPorIndice() {
+		System.out.println("\n=== QUITAR ARTISTA DEL RECITAL ===");
+	    mostrarArtistasConIndice();
+	    
+	    System.out.print("\nIngrese el índice del artista a quitar: ");
+	    int indice = scanner.nextInt();
+	    scanner.nextLine(); // limpiar ENTER
+	    indice = indice - 1;
+	    
+	    List<Artista> artistas = recital.getArtistas();
+	    
+	    if(indice < 0 || indice >= artistas.size()) {
+	    	System.out.println("Indice invalido.");
+	    	return;
+	    }
+	    
+	    Artista artista = artistas.get(indice);
+	    
+	    recital.quitarArtistaDelRecital(artista);
+	    System.out.println("Se quito a " + artista.getNombre() + " del recital.");
+	    //System.out.println("Se quitaron todos los contratos de " + artista.getNombre() + " del recital.");// USAR SI quiero solo quitar contratos
+	    
+	    
 	}
 }

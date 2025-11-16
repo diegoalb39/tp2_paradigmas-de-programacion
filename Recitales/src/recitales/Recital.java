@@ -60,6 +60,30 @@ public class Recital {
 		return cant;
 	
 	}
+	//2-Bonus
+	public Artista busacarArtistaPorNombre(String nombre) {
+		for (Artista a : artistas) {
+			if (a.getNombre().equalsIgnoreCase(nombre)) {
+				return a;
+			}
+		}
+		return null;
+	}
+	
+	public void quitarArtistaDelRecital(Artista artista) {
+		if (artista == null) {
+			return;
+		}
+		//1) quitar todos sus contratos de todas las canciones
+		for (Cancion c : canciones) {
+			c.quitarContratosDe(artista);
+		}
+		//2)limpiar contratos del lado del artista
+		artista.getContratos().clear();
+		//3)sacarlo de la lista de artistas participantes ->no se si dejarlo, ya que sigue existiendo, solo que no participa
+		artistas.remove(artista);
+		
+	}
 	
 	
 	
