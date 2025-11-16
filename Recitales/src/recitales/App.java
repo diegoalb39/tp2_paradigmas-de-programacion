@@ -36,15 +36,23 @@ public class App {
 		}
 		// ===================================*/
 		
-		//TODO Pasar el contendo de las clases Json a las clases normales
-		
 		// === Crear bandas ===
 		List<Banda> bandas = new ArrayList<>();
-		for (String nombreBanda : baseNombresJson) {
-		    bandas.add(new Banda(nombreBanda, new ArrayList<>()));
+		for (ArtistaJson aj : artistasJson) {
+			for(String nombreBanda : aj.getBandas()) {
+				boolean yaExiste = false;
+				for(Banda b : bandas) {
+					if(b.getNombre().equalsIgnoreCase(nombreBanda)) {
+						yaExiste = true;
+						break;
+					}
+				}
+				if(!yaExiste) {
+					bandas.add(new Banda(nombreBanda, new ArrayList<>()));
+				}
+			}
 		}
-
-
+		System.out.println(bandas);
 		// === Crear artistas ===
 		List<Artista> artistas = new ArrayList<>();
 		for (ArtistaJson aj : artistasJson) {
@@ -69,10 +77,20 @@ public class App {
 		for (CancionJson cj : cancionesJson) {
 		    canciones.add(convertirACancion(cj));
 		}
+		//bandas prueba
+		//System.out.println(bandas);
+		System.out.println(artistas.get(7).getBandas());
+		System.out.println(artistas.get(0).getBandas());
 //		//CONTRATO FEO
-//		canciones.get(0).contratarArtista(artistas.get(0), "guitarra eléctrica");
-//		canciones.get(1).contratarArtista(artistas.get(4), "voz principal");
-//		canciones.get(0).contratarArtista(artistas.get(4), "piano");	
+		canciones.get(0).contratarArtista(artistas.get(0), "guitarra eléctrica");
+		canciones.get(1).contratarArtista(artistas.get(4), "voz principal");
+		canciones.get(0).contratarArtista(artistas.get(4), "piano");	
+		canciones.get(0).contratarArtista(artistas.get(1), "batería");
+		canciones.get(0).contratarArtista(artistas.get(2), "bajo");
+		canciones.get(0).contratarArtista(artistas.get(7), "voz principal");
+		
+		System.out.println(artistas.get(7).getCostoBase());
+		
 		//----------
 
 

@@ -33,8 +33,7 @@ public class ArtistaInvitado extends Artista {
 		return false;
 	}
 	
-	public double getCosto() {
-		
+	public double getCostoBase() {
 		return this.tieneDescuento() ? costoBase*0.5 : costoBase ;
 	}
 	
@@ -42,13 +41,17 @@ public class ArtistaInvitado extends Artista {
 	public boolean tieneDescuento() {
 		
    		for (Banda banda : bandas) {
+   			System.out.println(banda);
 			for (Artista integrante : banda.getIntegrantes()) {
 				if(integrante.esBase())
 				{
+					System.out.println("SI comparte banda" + banda);
 					return true;
 				}
 			}  
 		}
+   
+   		System.out.println("sin descuento");
 		return false;
 	}
 	

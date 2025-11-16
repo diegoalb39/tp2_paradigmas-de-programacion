@@ -23,8 +23,9 @@ public class Banda {
 		return integrantes;
 	}
 
-	
-	
-	
+	@Override
+	public String toString() {
+		return "Banda [nombre=" + nombre + ", integrantes=" + integrantes + "]";
+	}
 	
 }

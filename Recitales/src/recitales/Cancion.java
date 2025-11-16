@@ -116,7 +116,8 @@ public class Cancion {
 
 	@Override
 	public String toString() {
-		return "Cancion [titulo=" + titulo + ", roles=" + roles + ", contratos=" + contratos + "]";
+		//return "Cancion [titulo=" + titulo + ", roles=" + roles + ", contratos=" + contratos + "]";
+		return "Cancion [titulo=" + titulo + ", roles=" + roles + "]";
 	}
 	
 	//PUNTO 7
