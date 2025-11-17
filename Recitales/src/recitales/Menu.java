@@ -50,7 +50,9 @@ public class Menu {
 	                scanner.nextLine();
 	                }
 	                case 2 ->{
-	                	System.out.println("Roles que faltan "+recital.rolesFaltantesEnTodas()+" en todas las canciones.");
+	                	Map<String, Integer> rolesFaltantesTodas = recital.rolesFaltantesTodasCanciones();
+	                	System.out.println("-----ROLES QUE FALTAN EN TODO EL RECITAL-----");
+	                	rolesFaltantesTodas.forEach((rol,cant)->System.out.println("Rol: "+rol+" Faltan:"+cant));
 	                }
 	                //case 3 -> 
 	                //case 4 -> 
