@@ -31,3 +31,4 @@ Thumbs.db
 # Archivos de error de la JVM
 hs_err_pid*
 replay_pid*
+/.metadata/

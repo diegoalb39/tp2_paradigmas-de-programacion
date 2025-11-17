@@ -164,7 +164,18 @@ public class Recital {
 
 	//////////////////////////////////////////////
 	
-	
+	//oara ej5
+	public String getArtistasFormato() {
+	    String artistasTexto = "";
+
+	    for (int i = 0; i < artistas.size(); i++) {
+	        artistasTexto += (i + 1) + ") ";
+	        artistasTexto += artistas.get(i).getNombre(); 
+	        artistasTexto += "\n";
+	    }
+
+	    return artistasTexto;
+	}
 	
 
 	

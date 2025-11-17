@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 import artistas.Artista;
+import artistas.ArtistaInvitado;
 import io.CancionOutJson;
 import io.ContratoOutJson;
 import io.JsonIO;
@@ -56,7 +57,9 @@ public class Menu {
 	                }
 	                //case 3 -> 
 	                //case 4 -> 
-	                //case 5 -> 
+	                case 5 -> {
+	                	entrenarArtista();
+	                }
 	                case 6 -> {
 	                	listarArtistasContratados();
 	                }
@@ -74,6 +77,36 @@ public class Menu {
 	            }
 
         } while (opcion != 0);
+    }
+    
+    //PUNTO 5
+    public void entrenarArtista() {
+    	int op;
+    	String rol;
+    	
+    	do {
+    		System.out.println("seleccione un artista de la lista para entrenar:");
+    		System.out.println(recital.getArtistasFormato());
+    		op = scanner.nextInt();
+    		scanner.nextLine();    		
+    	}while(op<1 || op>recital.getArtistas().size());
+    	
+    	Artista a = new Artista();
+    	a = recital.getArtistas().get(op);
+    	
+    	if(a.esBase()) {
+    		System.out.println("no se puede entrenar al artista, es un artista base.");
+    		return;
+    	}
+    	
+    	System.out.println("ingrese el rol para entrenar al artista: ");
+    	rol = scanner.nextLine();
+    	
+    	if(((ArtistaInvitado) a).entrenar(rol)) {
+    		System.out.println("el artista ha sido entrenado en el rol: " + rol);
+    	} else {
+    		System.out.println("no se pudo entrenar al artista. ya posee el rol o esta contratado.");
+    	}    	
     }
     
     
