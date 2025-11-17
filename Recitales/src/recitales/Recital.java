@@ -81,8 +81,7 @@ public class Recital {
 		//2)limpiar contratos del lado del artista
 		artista.getContratos().clear();
 		//3)sacarlo de la lista de artistas participantes ->no se si dejarlo, ya que sigue existiendo, solo que no participa
-		artistas.remove(artista);
-		
+		artistas.remove(artista);//creo que se saca
 	}
 	
 	
