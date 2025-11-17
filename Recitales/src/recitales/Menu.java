@@ -251,7 +251,7 @@ public class Menu {
 	//PUNTO 3 BONUS
 	public void mostrarGrafoColaboraciones() {
 	    System.out.println("\n=== HISTORIAL DE COLABORACIONES ===");
-	    // Mapa: "Artista1|Artista2" -> cantidad de canciones compartidas
+	    //"Artista1|Artista2" -> cantidad de canciones compartidas
 	    Map<String, Integer> colaboraciones = new HashMap<>();
 
 	    for (Cancion cancion : recital.getCanciones()) {
@@ -342,7 +342,7 @@ public class Menu {
 		return out;
 	}
 	
-	private void exportarRecital() {
+	public void exportarRecital() {
 		try {
 			RecitalOutJson dto = contruirRecitalOutDto(recital);
 			JsonIO.guardar(Path.of("data/recital-out.json"), dto);
