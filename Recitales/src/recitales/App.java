@@ -17,7 +17,7 @@ public class App {
 	public static void main(String[] args) throws IOException {
 		// ====== IMPORTACION DE ARCHIVOS ====
 		List<ArtistaJson> artistasJson = JsonIO.cargarArtistas(Path.of("data/artistas.json"));
-		List<String> baseNombresJson = JsonIO.cargarArtistasBase(Path.of("data/artistas-discografica.json"));
+		//List<String> baseNombresJson = JsonIO.cargarArtistasBase(Path.of("data/artistas-discografica.json"));
 		List<CancionJson> cancionesJson = JsonIO.cargarCanciones(Path.of("data/recital.json"));
 		
 		/*System.out.println("===== ARTISTAS =====");

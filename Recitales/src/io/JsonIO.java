@@ -7,6 +7,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+
 public class JsonIO {
 	private static final ObjectMapper mapper = new ObjectMapper();
 
@@ -31,7 +32,7 @@ public class JsonIO {
 		});
 	}
 
-	//print para exportar resultados, TODO testear
+	// print para exportar resultados, TODO testear
 	public static <T> void guardar(Path path, T objeto) throws IOException {
 		String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(objeto);
 		Files.writeString(path, json, StandardCharsets.UTF_8);

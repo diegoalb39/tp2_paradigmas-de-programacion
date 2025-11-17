@@ -9,21 +9,21 @@ import recitales.Contrato_x_Cancion;
 public class Artista {
 	private String nombre;
 	protected double costoBase;
-	protected List<String>roles;
-	protected List<Banda>bandas;
-	protected List<Contrato_x_Cancion>contratos = new ArrayList<Contrato_x_Cancion>();
-	
-	public Artista() {//jackson necesita contructores vacios
+	protected List<String> roles;
+	protected List<Banda> bandas;
+	protected List<Contrato_x_Cancion> contratos = new ArrayList<Contrato_x_Cancion>();
+
+	public Artista() {// jackson necesita contructores vacios
 	}
 
 	public Artista(String nombre, List<String> roles, List<Banda> bandas) {
-		this.nombre=nombre;
-		costoBase=0;
-		this.roles=roles;
-		this.bandas=bandas;
+		this.nombre = nombre;
+		costoBase = 0;
+		this.roles = roles;
+		this.bandas = bandas;
 
 	}
-	
+
 	public String getNombre() {
 		return nombre;
 	}
@@ -31,7 +31,7 @@ public class Artista {
 	public double getCostoBase() {
 		return this.costoBase;
 	}
-	
+
 	public List<String> getRoles() {
 		return roles;
 	}
@@ -44,9 +44,9 @@ public class Artista {
 		return contratos;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+//	public void setNombre(String nombre) {
+//		this.nombre = nombre;
+//	}
 
 	public void setCostoBase(double costoBase) {
 		this.costoBase = costoBase;
@@ -63,24 +63,23 @@ public class Artista {
 	public void setContratos(List<Contrato_x_Cancion> contratos) {
 		this.contratos = contratos;
 	}
-	
+
 	public boolean esBase() {
 		return true;
 	}
-	
-	
+
 	public boolean getDisponibilidad() {
-			return true;
-		
-	}
-	
-	public boolean contieneRol(String rol) {
-		if(this.roles.contains(rol))
 		return true;
+
+	}
+
+	public boolean contieneRol(String rol) {
+		if (this.roles.contains(rol))
+			return true;
 		else
 			return false;
 	}
-	
+
 	public void agregarContrato(Contrato_x_Cancion contrato) {
 		this.contratos.add(contrato);
 	}
@@ -89,14 +88,13 @@ public class Artista {
 	public String toString() {
 		return "Artista [nombre=" + nombre + ", costoBase=" + costoBase + "]";
 	}
-	
-	//PUNTO 6
+
+	// PUNTO 6
 	public boolean tieneContratos() {
-		if(this.getContratos().size() > 0) {
+		if (this.getContratos().size() > 0) {
 			return true;
 		}
 		return false;
 	}
 
-	
 }
