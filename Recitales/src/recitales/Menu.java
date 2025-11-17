@@ -1,10 +1,16 @@
 package recitales;
+import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
 import artistas.Artista;
+import io.CancionOutJson;
+import io.ContratoOutJson;
+import io.JsonIO;
+import io.RecitalOutJson;
 
 public class Menu {
 	private Recital recital;
@@ -55,10 +61,13 @@ public class Menu {
 	                case 7 -> {
 	                	listarCancionesConEstados();
 	                }
-	                case 8 ->{
+	                case 8 -> {
 	                	opcionArrepentimientoPorIndice();
 	                }
-	                case 0 -> System.out.println("Saliendo del sistema...");
+	                case 0 -> {
+	                	exportarRecital();
+	                	System.out.println("Saliendo del sistema...");
+	                }
 	                default -> System.out.println("Opción inválida");
 	            }
 
@@ -197,4 +206,55 @@ public class Menu {
 	    recital.quitarArtistaDelRecital(artista);
 	    System.out.println("Se quitaron todos los contratos de " + artista.getNombre() + " del recital.");
 	}
+	
+	
+	
+	//PUNTO 5 BONUS
+	private RecitalOutJson contruirRecitalOutDto(Recital recital) {
+		RecitalOutJson out = new RecitalOutJson();
+		out.canciones = new ArrayList<>();
+		double totalRecital = 0.0;
+		
+		for (Cancion c : recital.getCanciones()) {
+			CancionOutJson cOut =  new CancionOutJson();
+			cOut.titulo = c.getTitulo();
+			cOut.contratos = new ArrayList<>();
+			
+			double totalCancion = 0.0;
+			
+			for(Contrato_x_Cancion cx : c.getContratos()) {
+				ContratoOutJson cxOut = new  ContratoOutJson();
+				cxOut.artista = cx.getArtista().getNombre();
+				cxOut.rol = cx.getRol();
+				cxOut.costo = cx.getCosto();
+				
+				cOut.contratos.add(cxOut);
+				totalCancion += cxOut.costo;
+			}
+			
+			cOut.total = totalCancion;
+			
+			String estado = c.tieneTodosLosRolesCubiertos() ? "completa" : "incompleta";
+			cOut.estado = estado;
+			
+			out.canciones.add(cOut);
+			totalRecital += totalCancion;
+		}
+		
+		out.totalRecital = totalRecital;
+		return out;
+	}
+	
+	private void exportarRecital() {
+		try {
+			RecitalOutJson dto = contruirRecitalOutDto(recital);
+			JsonIO.guardar(Path.of("data/recital-out.json"), dto);
+			System.out.println("Se genero el archivo recital-out.json con el estado actual del recital.");
+		} catch (IOException e) {
+			System.out.println("Error al generar recital-out.json");
+		}
+	}
 }
+
+
+

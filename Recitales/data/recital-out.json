@@ -1,0 +1,48 @@
+{
+  "canciones" : [ {
+    "titulo" : "Somebody to Love",
+    "contratos" : [ {
+      "artista" : "Brian May",
+      "rol" : "guitarra eléctrica",
+      "costo" : 0.0
+    }, {
+      "artista" : "Elton John",
+      "rol" : "piano",
+      "costo" : 1200.0
+    }, {
+      "artista" : "Roger Taylor",
+      "rol" : "batería",
+      "costo" : 0.0
+    }, {
+      "artista" : "John Deacon",
+      "rol" : "bajo",
+      "costo" : 0.0
+    }, {
+      "artista" : "Lisa Stansfield",
+      "rol" : "voz principal",
+      "costo" : 400.0
+    } ],
+    "estado" : "completa",
+    "total" : 1600.0
+  }, {
+    "titulo" : "We Will Rock You",
+    "contratos" : [ {
+      "artista" : "Elton John",
+      "rol" : "voz principal",
+      "costo" : 1200.0
+    } ],
+    "estado" : "incompleta",
+    "total" : 1200.0
+  }, {
+    "titulo" : "These Are the Days of Our Lives",
+    "contratos" : [ ],
+    "estado" : "incompleta",
+    "total" : 0.0
+  }, {
+    "titulo" : "Under Pressure",
+    "contratos" : [ ],
+    "estado" : "incompleta",
+    "total" : 0.0
+  } ],
+  "totalRecital" : 2800.0
+}

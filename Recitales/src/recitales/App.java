@@ -3,10 +3,8 @@ package recitales;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
 
 import artistas.Artista;
 import artistas.ArtistaInvitado;
