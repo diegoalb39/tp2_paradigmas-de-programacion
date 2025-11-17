@@ -74,13 +74,13 @@ public class App {
 		    canciones.add(convertirACancion(cj));
 		}
 
-//		//CONTRATO FEO
-//		canciones.get(0).contratarArtista(artistas.get(0), "guitarra eléctrica");
-//		canciones.get(1).contratarArtista(artistas.get(4), "voz principal");
-//		canciones.get(0).contratarArtista(artistas.get(4), "piano");	
-//		canciones.get(0).contratarArtista(artistas.get(1), "batería");
-//		canciones.get(0).contratarArtista(artistas.get(2), "bajo");
-//		canciones.get(0).contratarArtista(artistas.get(7), "voz principal");
+		//CONTRATO FEO
+		canciones.get(0).contratarArtista(artistas.get(0), "guitarra eléctrica");
+		canciones.get(1).contratarArtista(artistas.get(4), "voz principal");
+		canciones.get(0).contratarArtista(artistas.get(4), "piano");	
+		canciones.get(0).contratarArtista(artistas.get(1), "batería");
+		canciones.get(0).contratarArtista(artistas.get(2), "bajo");
+		canciones.get(0).contratarArtista(artistas.get(7), "voz principal");
 		
 		//System.out.println(artistas.get(7).getCostoBase());
 		

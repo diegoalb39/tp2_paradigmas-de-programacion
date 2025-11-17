@@ -2,6 +2,7 @@ package recitales;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -34,7 +35,8 @@ public class Menu {
 	            System.out.println("5. Entrenar artista");
 	            System.out.println("6. Listar artistas contratados");
 	            System.out.println("7. Listar canciones con su estado");
-	            System.out.println("8. Quitar Artista del Recital");
+	            System.out.println("8. Quitar artista del recital");
+	            System.out.println("9. Mostrar historial de colaboraciones");
 	            System.out.println("0. Salir");
 	            System.out.print("Elija una opción: ");
 
@@ -68,6 +70,9 @@ public class Menu {
 	                }
 	                case 8 -> {
 	                	opcionArrepentimientoPorIndice();
+	                }
+	                case 9 -> {
+	                	mostrarGrafoColaboraciones();
 	                }
 	                case 0 -> {
 	                	exportarRecital();
@@ -149,7 +154,7 @@ public class Menu {
 		System.out.println("Total: $" + total);
 	}
 	
-	 //PUNTO 7
+	//PUNTO 7
 	public void listarCancionesConEstados() {
 		System.out.println("\n=== LISTA DE CANCIONES CON SU ESTADO ===");
 		System.out.printf("%-33s | %-10s | %-10s | %-30s%n","CANCION", "ESTADO", "COSTO", "ROLES FALTANTES");
@@ -243,7 +248,64 @@ public class Menu {
 	}
 	
 	
-	
+	//PUNTO 3 BONUS
+	public void mostrarGrafoColaboraciones() {
+	    System.out.println("\n=== HISTORIAL DE COLABORACIONES ===");
+	    // Mapa: "Artista1|Artista2" -> cantidad de canciones compartidas
+	    Map<String, Integer> colaboraciones = new HashMap<>();
+
+	    for (Cancion cancion : recital.getCanciones()) {
+	        // Obtener artistas que participan en esta canción
+	        List<Artista> participantes = new ArrayList<>();
+	        for (Contrato_x_Cancion c : cancion.getContratos()) {
+	            Artista a = c.getArtista();
+	            if (!participantes.contains(a)) {
+	                participantes.add(a);
+	            }
+	        }
+
+	        // Generar todos los pares (i,j) sin repetir
+	        for (int i = 0; i < participantes.size(); i++) {
+	            for (int j = i + 1; j < participantes.size(); j++) {
+
+	                Artista a1 = participantes.get(i);
+	                Artista a2 = participantes.get(j);
+
+	                // Siempre ordenamos los nombres, así A|B y B|A son la misma clave
+	                String nombre1 = a1.getNombre();
+	                String nombre2 = a2.getNombre();
+
+	                String clave = nombre1.compareTo(nombre2) < 0
+	                        ? nombre1 + "|" + nombre2
+	                        : nombre2 + "|" + nombre1;
+
+	                colaboraciones.put(clave, colaboraciones.getOrDefault(clave, 0) + 1);
+	            }
+	        }
+	    }
+
+	    // Mostrar resultados
+	    if (colaboraciones.isEmpty()) {
+	        System.out.println("No hay colaboraciones registradas.");
+	        return;
+	    }
+
+	    for (Map.Entry<String, Integer> entry : colaboraciones.entrySet()) {
+	        String clave = entry.getKey();
+	        int cantidad = entry.getValue();
+
+	        String[] artistas = clave.split("\\|");
+	        String a1 = artistas[0];
+	        String a2 = artistas[1];
+
+	        System.out.printf("%s ↔ %s (%d canción%s)\n",
+	                a1,
+	                a2,
+	                cantidad,
+	                cantidad > 1 ? "es" : ""
+	        );
+	    }
+	}
 	//PUNTO 5 BONUS
 	private RecitalOutJson contruirRecitalOutDto(Recital recital) {
 		RecitalOutJson out = new RecitalOutJson();
