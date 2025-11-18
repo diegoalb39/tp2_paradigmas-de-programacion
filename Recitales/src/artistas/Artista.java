@@ -44,9 +44,9 @@ public class Artista {
 		return contratos;
 	}
 
-//	public void setNombre(String nombre) {
-//		this.nombre = nombre;
-//	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 
 	public void setCostoBase(double costoBase) {
 		this.costoBase = costoBase;
