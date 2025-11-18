@@ -21,7 +21,7 @@ public class ArtistaInvitado extends Artista {
 
 	public boolean entrenar(String rol) {
 
-		if (this.contratos.isEmpty() && !this.esBase()) {
+		if (this.contratos.isEmpty() && !this.esBase() && !this.roles.contains(rol)) {
 			this.roles.add(rol);
 			this.costoBase *= 1.5;
 			return true;
@@ -52,5 +52,21 @@ public class ArtistaInvitado extends Artista {
 		return cantDisp != 0;
 
 	}
+	
+	public boolean esEntrenable() {
+		return this.contratosvacio();
+	}
 
+	public int getMaxCanciones() {
+		return this.maxCanciones;
+	}
+	
+	public int getCupoDisponible() {
+		return  maxCanciones-contratos.size();
+	}
+	
+	@Override
+	public String toString() {
+		return "ArtistaInvitado [nombre " + this.nombre + "  maxCanciones=" + maxCanciones + "]";
+	}
 }

@@ -2,7 +2,6 @@
    {
       "nombre": "Brian May",
       "roles": [
-         "guitarra eléctrica",
          "voz secundaria"
       ],
       "bandas": [
@@ -76,7 +75,8 @@
          "voz principal"
       ],
       "bandas": [
-         "Eurythmics"
+         "Eurythmics",
+		 "Queen"
       ],
       "costo": 900,
       "maxCanciones": 2

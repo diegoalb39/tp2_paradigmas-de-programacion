@@ -37,7 +37,7 @@ public class Cancion {
 		return this.roles.contains(rol);
 	}
 	
-	private boolean cancionTieneArtista(Artista artista) {
+	public boolean cancionTieneArtista(Artista artista) {
 		for (Contrato_x_Cancion contrato : this.contratos) {
 	        if (contrato.getArtista().equals(artista)) {
 	            return true;
@@ -149,5 +149,21 @@ public class Cancion {
 				it.remove();
 			}
 		}
+	}
+	
+	//REVISAR
+	public void agregarContrato(Contrato_x_Cancion contrato) {
+		this.contratos.add(contrato);
+	}
+	
+	public void mostrarContratos() {
+		for (Contrato_x_Cancion contrato : contratos) {
+			System.out.println(contrato);
+		}
+	}
+	
+	public boolean necesitaRol(String rol) {
+	    int cantidadNecesaria = this.rolesFaltantesConCantidad().getOrDefault(rol, 0);
+	    return cantidadNecesaria > 0;
 	}
 }

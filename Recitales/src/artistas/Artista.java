@@ -2,12 +2,13 @@ package artistas;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import recitales.Banda;
 import recitales.Contrato_x_Cancion;
 
 public class Artista {
-	private String nombre;
+	protected String nombre;
 	protected double costoBase;
 	protected List<String> roles;
 	protected List<Banda> bandas;
@@ -96,5 +97,35 @@ public class Artista {
 		}
 		return false;
 	}
+	
+	//REVISAR
+	public boolean contratosvacio() {
+		return this.contratos.isEmpty();
+	}
+
+	public int getMaxCanciones() {
+		return 100;
+	}
+	public int getCupoDisponible() {
+		return 100;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(nombre);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Artista other = (Artista) obj;
+		return Objects.equals(nombre, other.nombre);
+	}
+	
 
 }

@@ -50,8 +50,12 @@ public class Menu {
 			case 2 -> {
 				rolesFaltanteParaTodasLasCanciones();
 			}
-			// case 3 ->
-			// case 4 ->
+			case 3 -> {
+				contratarArtistaParaCancion();
+			}
+			case 4 -> {
+				contratarArtistasParaRecital();
+			}
 			case 5 -> {
 				entrenarArtista();
 			}
@@ -92,6 +96,94 @@ public class Menu {
 		Map<String, Integer> rolesFaltantesTodas = recital.rolesFaltantesTodasCanciones();
 		System.out.println("-----ROLES QUE FALTAN EN TODO EL RECITAL-----");
 		rolesFaltantesTodas.forEach((rol, cant) -> System.out.println("Rol: " + rol + " Faltan:" + cant));
+	}
+
+	// PUNTO 3
+	private void contratarArtistaParaCancion() {
+		int opc2;
+
+		List<Cancion> canciones = recital.getCancionesIncompletas();
+		boolean rta = true;
+
+		if (canciones.isEmpty()) {
+			System.out.println("\nTodas las canciones ya están completas.");
+			return;
+		}
+		System.out.println("\nElija una cancion: \n");
+		for (int i = 0; i < canciones.size(); i++) {
+			System.out.println((i + 1) + ") " + canciones.get(i).getTitulo());
+
+		}
+		opc2 = scanner.nextInt();
+		rta = recital.contratarParaCancion(canciones.get(opc2 - 1));
+
+		System.out.println(rta);
+		if (rta && recital.cuantosRolesFaltanCancion(opc2) > 0) {
+			Map<ArtistaInvitado, String> sugeridos = recital.buscarEntrenables(recital.getCancion(opc2 - 1));
+
+			if (!sugeridos.isEmpty()) {
+				System.out.println("\nSe recomienda entrenar:");
+				for (Map.Entry<ArtistaInvitado, String> e : sugeridos.entrySet()) {
+					System.out.println(e.getKey().getNombre() + " para rol " + e.getValue());
+				}
+
+				System.out.println("\n¿Desea entrenarlos y contratarlos? (0=No, 1=Sí): ");
+				int r = scanner.nextInt();
+
+				if (r == 1) {
+					recital.entrenarArtistasYContratar(sugeridos, recital.getCancion(opc2 - 1));
+				}
+			}
+		}
+
+		System.out.println("CONTRATOS FINALES:");
+		canciones.get(opc2 - 1).mostrarContratos();
+	}
+
+	// PUNTO 4
+	private void contratarArtistasParaRecital() {
+
+		boolean rta = true;
+
+		List<Cancion> canciones = recital.getCancionesIncompletas();
+		if (canciones.isEmpty()) {
+			System.out.println("\nTodas las canciones ya están completas.");
+			return;
+		}
+		rta = recital.contratarParaRecital();
+		System.out.println(rta);
+
+		if (rta && recital.cuantosRolesFaltanEnTodas() > 0) {
+
+			Map<ArtistaInvitado, String> sugeridos = recital.buscarEntrenablesReci();
+
+			if (!sugeridos.isEmpty()) {
+
+				System.out.println("\nSe recomienda entrenar para el recital:");
+
+				for (Map.Entry<ArtistaInvitado, String> e : sugeridos.entrySet()) {
+					System.out.println(e.getKey().getNombre() + " para rol " + e.getValue());
+				}
+
+				System.out.println("\n¿Desea entrenarlos y contratarlos? (0=No, 1=Sí): ");
+				int r = scanner.nextInt();
+
+				if (r == 1) {
+					recital.entrenarArtistasYContratarRecital(sugeridos);
+				}
+			}
+		}
+
+		List<Cancion> todas = recital.getCanciones();
+		for (int i = 0; i < todas.size(); i++) {
+			Cancion c = todas.get(i);
+
+			System.out.println("Canción " + (i + 1) + ": " + c.getTitulo());
+			c.mostrarContratos();
+			System.out.println("--------------------------------------\n");
+		}
+
+		return;
 	}
 
 	// PUNTO 5
