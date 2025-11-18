@@ -103,8 +103,8 @@ class ArtistaInvitadoTest {
 		List<Banda> bandas = new ArrayList<>();
 		ArtistaInvitado invitado = new ArtistaInvitado("Invitado", new ArrayList<>(rolesBase), bandas, 1000.0, 2);
 
-		assertTrue(invitado.getDisponibilidad(),"Con 0 contratos y maxCanciones=2 deberia estar disponible");
-		
+		assertTrue(invitado.getDisponibilidad(), "Con 0 contratos y maxCanciones=2 deberia estar disponible");
+
 		Contrato_x_Cancion c1 = new Contrato_x_Cancion(invitado, null, "cantante");
 		invitado.agregarContrato(c1);
 		assertTrue(invitado.getDisponibilidad(), "Con 1 contrato y maxCanciones=2 deberia estar disponible");
