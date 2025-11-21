@@ -14,7 +14,7 @@ public class Artista {
 	protected List<Banda> bandas;
 	protected List<Contrato_x_Cancion> contratos = new ArrayList<Contrato_x_Cancion>();
 
-	public Artista() {// jackson necesita contructores vacios
+	public Artista() {
 	}
 
 	public Artista(String nombre, List<String> roles, List<Banda> bandas) {
@@ -45,26 +45,6 @@ public class Artista {
 		return contratos;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public void setCostoBase(double costoBase) {
-		this.costoBase = costoBase;
-	}
-
-	public void setRoles(List<String> roles) {
-		this.roles = roles;
-	}
-
-	public void setBandas(List<Banda> bandas) {
-		this.bandas = bandas;
-	}
-
-	public void setContratos(List<Contrato_x_Cancion> contratos) {
-		this.contratos = contratos;
-	}
-
 	public boolean esBase() {
 		return true;
 	}
@@ -85,20 +65,13 @@ public class Artista {
 		this.contratos.add(contrato);
 	}
 
-	@Override
-	public String toString() {
-		return "Artista [nombre=" + nombre + ", costoBase=" + costoBase + "]";
-	}
-
-	// PUNTO 6
 	public boolean tieneContratos() {
 		if (this.getContratos().size() > 0) {
 			return true;
 		}
 		return false;
 	}
-	
-	//REVISAR
+
 	public boolean contratosvacio() {
 		return this.contratos.isEmpty();
 	}
@@ -106,6 +79,7 @@ public class Artista {
 	public int getMaxCanciones() {
 		return 100;
 	}
+
 	public int getCupoDisponible() {
 		return 100;
 	}
@@ -127,5 +101,9 @@ public class Artista {
 		return Objects.equals(nombre, other.nombre);
 	}
 	
+	@Override
+	public String toString() {
+		return "Artista [nombre=" + nombre + ", costoBase=" + costoBase + "]";
+	}
 
 }

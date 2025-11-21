@@ -21,6 +21,18 @@ public class Cancion {
 	
 	public Cancion() {
 	}
+	
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public List<String> getRoles() {
+		return roles;
+	}
+
+	public List<Contrato_x_Cancion> getContratos() {
+		return contratos;
+	}
 
 	public boolean contratarArtista(Artista artista, String rol) {
 		if( !this.cancionContieneRol(rol) || !artista.getDisponibilidad() || !artista.contieneRol(rol) || this.cancionTieneArtista(artista) || !this.rolEstaDisponible(rol) ) {
@@ -66,7 +78,6 @@ public class Cancion {
 			return roles.size()-contratos.size();
 	}
 	
-//	¿Qué roles (con cantidad) me faltan para tocar una canción X del recital?
 	public Map<String,Integer> rolesFaltantesConCantidad(){
 		Map<String,Integer> rolesconcantidad= new HashMap<String, Integer>();
 		int cantidadRol=0, cantidadContrato=0;
@@ -84,43 +95,10 @@ public class Cancion {
 				}				
 				rolesconcantidad.put(rold,cantidadRol - cantidadContrato);
 			}
-		}
-				
+		}	
 		return rolesconcantidad;
 	}
 	
-	
-	public String getTitulo() {
-		return titulo;
-	}
-
-	public List<String> getRoles() {
-		return roles;
-	}
-
-	public List<Contrato_x_Cancion> getContratos() {
-		return contratos;
-	}
-
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
-	}
-
-	public void setRoles(List<String> roles) {
-		this.roles = roles;
-	}
-
-	public void setContratos(List<Contrato_x_Cancion> contratos) {
-		this.contratos = contratos;
-	}
-
-	@Override
-	public String toString() {
-		//return "Cancion [titulo=" + titulo + ", roles=" + roles + ", contratos=" + contratos + "]";
-		return "Cancion [titulo=" + titulo + ", roles=" + roles + "]";
-	}
-	
-	//PUNTO 7
 	public double calcularCosto() {
 		double total = 0;
 		for (Contrato_x_Cancion c : contratos) {
@@ -128,20 +106,19 @@ public class Cancion {
 		}
 		return total;
 	}
-	// true si no falta ningún rol
+
 	public boolean tieneTodosLosRolesCubiertos() {
 		Map<String, Integer> faltantes = this.rolesFaltantesConCantidad();
 		for (Integer cant : faltantes.values()) {
 			if(cant > 0) {
-				return false;// si falta al menos 1 de algún rol -> INCOMPLETA
+				return false;
 			}
 		}
 		return true;
 	}
 	
-	//2-Bonus
+
 	public void quitarContratosDe(Artista artista) {
-	// recorro con iterador para poder remover el elemento mientras lo recorro, con un for seria mas dificil
 		Iterator<Contrato_x_Cancion> it = contratos.iterator();
 		while(it.hasNext()) {
 			Contrato_x_Cancion c = it.next();
@@ -151,7 +128,6 @@ public class Cancion {
 		}
 	}
 	
-	//REVISAR
 	public void agregarContrato(Contrato_x_Cancion contrato) {
 		this.contratos.add(contrato);
 	}
@@ -165,5 +141,10 @@ public class Cancion {
 	public boolean necesitaRol(String rol) {
 	    int cantidadNecesaria = this.rolesFaltantesConCantidad().getOrDefault(rol, 0);
 	    return cantidadNecesaria > 0;
+	}
+	
+	@Override
+	public String toString() {
+		return "Cancion [titulo=" + titulo + ", roles=" + roles + "]";
 	}
 }

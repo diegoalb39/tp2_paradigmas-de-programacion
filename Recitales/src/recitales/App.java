@@ -15,9 +15,9 @@ import io.CancionJson;
 public class App {
 
 	public static void main(String[] args) throws IOException {
-		// ====== IMPORTACION DE ARCHIVOS ====
+		// === Importacion de Json===
 		List<ArtistaJson> artistasJson = JsonIO.cargarArtistas(Path.of("data/artistas.json"));
-		// List<String> baseNombresJson = JsonIO.cargarArtistasBase(Path.of("data/artistas-discografica.json"));
+		List<String> baseNombresJson = JsonIO.cargarArtistasBase(Path.of("data/artistas-discografica.json"));
 		List<CancionJson> cancionesJson = JsonIO.cargarCanciones(Path.of("data/recital.json"));
 
 		// === Crear bandas ===
@@ -40,14 +40,13 @@ public class App {
 		// === Crear artistas ===
 		List<Artista> artistas = new ArrayList<>();
 		for (ArtistaJson aj : artistasJson) {
-			artistas.add(convertirAArtista(aj, bandas));
+			artistas.add(convertirAArtista(aj, bandas, baseNombresJson));
 		}
 
 		// === Cargar artistas dentro de sus bandas ===
 		for (Banda banda : bandas) {
 			for (Artista artista : artistas) {
 				if (artista.getBandas().stream().anyMatch(b -> b.getNombre().equalsIgnoreCase(banda.getNombre()))) {
-
 					banda.getIntegrantes().add(artista);
 				}
 			}
@@ -59,15 +58,6 @@ public class App {
 			canciones.add(convertirACancion(cj));
 		}
 
-		// CONTRATO FEO
-//		canciones.get(0).contratarArtista(artistas.get(0), "guitarra eléctrica");
-//		canciones.get(1).contratarArtista(artistas.get(4), "voz principal");
-//		canciones.get(0).contratarArtista(artistas.get(4), "piano");
-//		canciones.get(0).contratarArtista(artistas.get(1), "batería");
-//		canciones.get(0).contratarArtista(artistas.get(2), "bajo");
-//		canciones.get(0).contratarArtista(artistas.get(7), "voz principal");
-		// ----------
-
 		// === Crear recital ===
 		Recital recital = new Recital("Recital Principal", canciones, artistas);
 
@@ -77,26 +67,22 @@ public class App {
 		menu.mostrar();
 	}
 
-	private static Artista convertirAArtista(ArtistaJson json, List<Banda> bandasReales) {
-		// Encontrar todas las bandas reales que coincidan con las del JSON
+	private static Artista convertirAArtista(ArtistaJson json, List<Banda> bandasReales, List<String> bases) {
 		List<Banda> bandasDelArtista = new ArrayList<>();
 		for (String nombreBanda : json.getBandas()) {
 			bandasReales.stream().filter(b -> b.getNombre().equalsIgnoreCase(nombreBanda)).findFirst()
 					.ifPresent(bandasDelArtista::add);
 		}
 
-		// Si tiene costo, es ArtistaInvitado
-		if (json.getCosto() > 0) {
-			return new ArtistaInvitado(json.getNombre(), json.getRoles(), bandasDelArtista, json.getCosto(),
-					json.getMaxCanciones());
+		boolean esBase = bases.contains(json.getNombre());
+		if (esBase) {
+			return new Artista(json.getNombre(), json.getRoles(), bandasDelArtista);
 		}
-
-		// Si no, es Artista normal
-		return new Artista(json.getNombre(), json.getRoles(), bandasDelArtista);
+		return new ArtistaInvitado(json.getNombre(), json.getRoles(), bandasDelArtista, json.getCosto(),
+				json.getMaxCanciones());
 	}
 
 	private static Cancion convertirACancion(CancionJson json) {
 		return new Cancion(json.getTitulo(), json.getRolesRequeridos());
 	}
-
 }

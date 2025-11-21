@@ -27,7 +27,7 @@ public class Menu {
 	public void mostrar() {
 		int opcion;
 		do {
-			System.out.println("=== MENÚ PRINCIPAL ===");
+			System.out.println("\n=============== MENÚ PRINCIPAL ===============");
 			System.out.println("1. Ver roles faltantes de una canción");
 			System.out.println("2. Ver roles faltantes del recital");
 			System.out.println("3. Contratar artistas para una canción");
@@ -38,10 +38,11 @@ public class Menu {
 			System.out.println("8. Quitar artista del recital");
 			System.out.println("9. Mostrar historial de colaboraciones");
 			System.out.println("0. Salir");
+			System.out.println("==============================================");
 			System.out.print("Elija una opción: ");
 
 			opcion = scanner.nextInt();
-			scanner.nextLine(); // limpiar buffer
+			scanner.nextLine();
 
 			switch (opcion) {
 			case 1 -> {
@@ -77,25 +78,37 @@ public class Menu {
 			}
 			default -> System.out.println("Opción inválida");
 			}
+			
+			if (opcion != 0) {
+                System.out.println("\nPresione ENTER para continuar...");
+                scanner.nextLine(); 
+                limpiarPantalla();
+            }
 
 		} while (opcion != 0);
 	}
+	
+	static void limpiarPantalla() {
+		System.out.print("\033[H\033[2J");
+	    System.out.flush();
+    }
 
 	// PUNTO 1
 	public void rolesFaltantesParaUnaCancion() {
-		System.out.println("\nElija una cancion: \n" + recital.getTituloCanciones());
+		System.out.println("\n===== ROLES FALTANTES PARA UNA CANCION =====");
+		System.out.println("Elija una cancion: \n" + recital.getTituloCanciones());
 		int opc2 = scanner.nextInt();
 		Map<String, Integer> rolesqFaltan = recital.rolesFaltantesCancionCantidad(opc2 - 1);
 		System.out.println("En la cancion " + opc2 + " faltan: ");
-		rolesqFaltan.forEach((titulo, cantidad) -> System.out.println("Titulo: " + titulo + " Cantidad: " + cantidad));
+		rolesqFaltan.forEach((rol, cantidad) -> System.out.println("Rol: " + rol + " - Cantidad: " + cantidad));
 		scanner.nextLine();
 	}
 
 	// PUNTO 2
 	public void rolesFaltanteParaTodasLasCanciones() {
 		Map<String, Integer> rolesFaltantesTodas = recital.rolesFaltantesTodasCanciones();
-		System.out.println("-----ROLES QUE FALTAN EN TODO EL RECITAL-----");
-		rolesFaltantesTodas.forEach((rol, cant) -> System.out.println("Rol: " + rol + " Faltan:" + cant));
+		System.out.println("\n===== ROLES QUE FALTAN EN TODO EL RECITAL =====");
+		rolesFaltantesTodas.forEach((rol, cant) -> System.out.println("Rol: " + rol + " - Faltan:" + cant));
 	}
 
 	// PUNTO 3
@@ -104,12 +117,12 @@ public class Menu {
 
 		List<Cancion> canciones = recital.getCancionesIncompletas();
 		boolean rta = true;
-
+		System.out.println("\n===== CONTRATAR ARTISTAS PARA UNA CANCION =====");
 		if (canciones.isEmpty()) {
 			System.out.println("\nTodas las canciones ya están completas.");
 			return;
 		}
-		System.out.println("\nElija una cancion: \n");
+		System.out.println("Elija una cancion:");
 		for (int i = 0; i < canciones.size(); i++) {
 			System.out.println((i + 1) + ") " + canciones.get(i).getTitulo());
 
@@ -117,7 +130,7 @@ public class Menu {
 		opc2 = scanner.nextInt();
 		rta = recital.contratarParaCancion(canciones.get(opc2 - 1));
 
-		System.out.println(rta);
+		System.out.println("Artistas contratados");
 		if (rta && recital.cuantosRolesFaltanCancion(opc2) > 0) {
 			Map<ArtistaInvitado, String> sugeridos = recital.buscarEntrenables(recital.getCancion(opc2 - 1));
 
@@ -127,7 +140,7 @@ public class Menu {
 					System.out.println(e.getKey().getNombre() + " para rol " + e.getValue());
 				}
 
-				System.out.println("\n¿Desea entrenarlos y contratarlos? (0=No, 1=Sí): ");
+				System.out.println("\n¿Desea entrenarlos y contratarlos? (0 = No, 1 = Si): ");
 				int r = scanner.nextInt();
 
 				if (r == 1) {
@@ -144,14 +157,14 @@ public class Menu {
 	private void contratarArtistasParaRecital() {
 
 		boolean rta = true;
-
+		System.out.println("\n===== CONTRATAR ARTISTAS PARA TODAS LAS CANCIONES =====");
 		List<Cancion> canciones = recital.getCancionesIncompletas();
 		if (canciones.isEmpty()) {
 			System.out.println("\nTodas las canciones ya están completas.");
 			return;
 		}
 		rta = recital.contratarParaRecital();
-		System.out.println(rta);
+		System.out.println("Artistas contratados");
 
 		if (rta && recital.cuantosRolesFaltanEnTodas() > 0) {
 
@@ -190,29 +203,29 @@ public class Menu {
 	public void entrenarArtista() {
 		int op;
 		String rol;
-
+		System.out.println("\n===== ENTRENAR ARTISTA =====");
 		do {
-			System.out.println("seleccione un artista de la lista para entrenar:");
+			System.out.println("Seleccione un artista de la lista para entrenar:");
 			System.out.println(recital.getArtistasFormato());
 			op = scanner.nextInt();
 			scanner.nextLine();
 		} while (op < 1 || op > recital.getArtistas().size());
 
 		Artista a = new Artista();
-		a = recital.getArtistas().get(op);
+		a = recital.getArtistas().get(op - 1);
 
 		if (a.esBase()) {
-			System.out.println("no se puede entrenar al artista, es un artista base.");
+			System.out.println("No se puede entrenar al artista, es un artista base.");
 			return;
 		}
 
-		System.out.println("ingrese el rol para entrenar al artista: ");
+		System.out.println("Ingrese el rol para entrenar al artista: ");
 		rol = scanner.nextLine();
 
 		if (((ArtistaInvitado) a).entrenar(rol)) {
-			System.out.println("el artista ha sido entrenado en el rol: " + rol);
+			System.out.println("El artista ha sido entrenado en el rol: " + rol);
 		} else {
-			System.out.println("no se pudo entrenar al artista. ya posee el rol o esta contratado.");
+			System.out.println("No se pudo entrenar al artista. ya posee el rol o esta contratado.");
 		}
 	}
 
@@ -220,7 +233,7 @@ public class Menu {
 	public void listarArtistasContratados() {
 		double total = 0;
 
-		System.out.println("\n=== LISTA DE ARTISTAS CONTRATADOS ===");
+		System.out.println("\n===== LISTA DE ARTISTAS CONTRATADOS =====");
 		System.out.printf("%-20s | %-20s | %-15s | %-10s%n", "ARTISTA", "CANCION", "ROL", "COSTO");
 		System.out.println("----------------------------------------------------------------------------------");
 
@@ -239,7 +252,7 @@ public class Menu {
 					}
 					subtotal += c.getCosto();
 				}
-				System.out.printf("   Subtotal %-34s $%.2f%n", "", subtotal);
+				System.out.printf("   Subtotal: $%.2f\n", subtotal);
 				System.out
 						.println("----------------------------------------------------------------------------------");
 				total += subtotal;
@@ -250,7 +263,7 @@ public class Menu {
 
 	// PUNTO 7
 	public void listarCancionesConEstados() {
-		System.out.println("\n=== LISTA DE CANCIONES CON SU ESTADO ===");
+		System.out.println("\n===== LISTA DE CANCIONES CON SU ESTADO =====");
 		System.out.printf("%-33s | %-10s | %-10s | %-30s%n", "CANCION", "ESTADO", "COSTO", "ROLES FALTANTES");
 		System.out
 				.println("-------------------------------------------------------------------------------------------");
@@ -262,7 +275,7 @@ public class Menu {
 
 			String estado = completa ? "COMPLETA" : "INCOMPLETA";
 
-			StringBuilder faltantesTexto = new StringBuilder();// texto tipo: "voz principal (1), coro (2)"
+			StringBuilder faltantesTexto = new StringBuilder();
 			for (Map.Entry<String, Integer> entry : faltantes.entrySet()) {
 				String rol = entry.getKey();
 				int cant = entry.getValue();
@@ -284,9 +297,8 @@ public class Menu {
 	}
 
 	// PUNTO 2 BONUS
-	private List<Artista> mostrarArtistasContratadosConIndice() {// USAR EN opcionArrepentimientoPorIndice si solo se
-																	// quiere sacar artistas con contrato
-		System.out.println("\n=== ARTISTAS CON CONTRATOS ===");
+	private List<Artista> mostrarArtistasContratadosConIndice() {
+		System.out.println("Artistas con contratos:");
 
 		List<Artista> artistasConContratos = new ArrayList<>();
 		List<Artista> artistas = recital.getArtistas();
@@ -308,17 +320,17 @@ public class Menu {
 	}
 
 	public void opcionArrepentimientoPorIndice() {
-		System.out.println("\n=== QUITAR ARTISTA DEL RECITAL ===");
+		System.out.println("\n===== QUITAR ARTISTA DEL RECITAL =====");
 		List<Artista> artistasConContratos = mostrarArtistasContratadosConIndice();
 
 		if (artistasConContratos.isEmpty()) {
 			return;
 		}
 
-		System.out.print("\nIngrese el índice del artista a quitar: ");
+		System.out.print("\nIngrese el artista a quitar: ");
 		int indice = scanner.nextInt();
-		scanner.nextLine(); // limpiar ENTER
-		indice = indice - 1;// mostramos desde 1
+		scanner.nextLine();
+		indice = indice - 1;
 
 		if (indice < 0 || indice >= artistasConContratos.size()) {
 			System.out.println("Indice invalido.");
@@ -333,8 +345,7 @@ public class Menu {
 
 	// PUNTO 3 BONUS
 	public void mostrarGrafoColaboraciones() {
-		System.out.println("\n=== HISTORIAL DE COLABORACIONES ===");
-		// Artista1|Artista2 -> cantidad de canciones compartidas
+		System.out.println("\n===== HISTORIAL DE COLABORACIONES =====");
 		Map<String, Integer> colaboraciones = new HashMap<>();
 
 		for (Cancion cancion : recital.getCanciones()) {
@@ -345,14 +356,12 @@ public class Menu {
 					participantes.add(a);
 				}
 			}
-			// pares (i,j) sin repetir
 			for (int i = 0; i < participantes.size(); i++) {
 				for (int j = i + 1; j < participantes.size(); j++) {
 
 					Artista a1 = participantes.get(i);
 					Artista a2 = participantes.get(j);
 
-					// A|B y B|A son la misma clave
 					String nombre1 = a1.getNombre();
 					String nombre2 = a2.getNombre();
 
@@ -361,7 +370,7 @@ public class Menu {
 				}
 			}
 		}
-		// Mostrar resultados
+
 		if (colaboraciones.isEmpty()) {
 			System.out.println("No hay colaboraciones registradas.");
 			return;

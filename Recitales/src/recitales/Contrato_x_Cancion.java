@@ -7,15 +7,13 @@ public class Contrato_x_Cancion {
 	private Cancion cancion;
 	private double costo;
 	private String rol;
-	
-	
+
 	public Contrato_x_Cancion(Artista artista, Cancion cancion, String rol) {
 		this.artista = artista;
 		this.cancion = cancion;
-		this.costo =artista.getCostoBase();
-		this.rol=rol;
+		this.costo = artista.getCostoBase();
+		this.rol = rol;
 	}
-
 
 	public Artista getArtista() {
 		return artista;
@@ -25,24 +23,17 @@ public class Contrato_x_Cancion {
 		return cancion;
 	}
 
-
 	public double getCosto() {
 		return costo;
 	}
-
-
 
 	public String getRol() {
 		return rol;
 	}
 
-
 	@Override
 	public String toString() {
-		return "Contrato_x_Cancion [artista=" + artista + ", cancion=" + cancion + ", costo=" + costo + ", rol=" + rol
-				+ "]";
+		return artista.getNombre() + "\n - Costo: $" + costo + "\n - Rol: " + rol;
 	}
 
-
-	
 }

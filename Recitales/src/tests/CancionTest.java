@@ -70,11 +70,10 @@ class CancionTest {
 	@Test
 	public void contratarArtistaFallaPorArtistaRepetidoEnLaCancion() {
 		Artista cantante = new Artista("Juan", Arrays.asList("cantante"), new ArrayList<Banda>());
-		// primer contrato exitoso
+
 		assertTrue(cancionBase.contratarArtista(cantante, "cantante"));
 		assertEquals(1, cancionBase.getContratos().size());
 
-		// Segundo contrato fallido
 		boolean segundoResultado = cancionBase.contratarArtista(cantante, "guitarra");
 		assertFalse(segundoResultado, "El mismo artista no deberia poder contratarse dos veces en la misma cancion");
 		assertEquals(1, cancionBase.getContratos().size(), "No debe haberse agregado un nuevo contrato");
@@ -97,7 +96,6 @@ class CancionTest {
 		assertEquals(2, cancion.getContratos().size());
 	}
 
-	//////////////////////
 	@Test
 	public void rolesFaltantesCuentaTotalCorrectamente() {
 		assertEquals(rolesBase.size(), cancionBase.rolesFaltantes());

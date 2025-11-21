@@ -1,96 +1,24 @@
 {
   "canciones" : [ {
     "titulo" : "Somebody to Love",
-    "contratos" : [ {
-      "artista" : "Lisa Stansfield",
-      "rol" : "voz principal",
-      "costo" : 400.0
-    }, {
-      "artista" : "John Deacon",
-      "rol" : "bajo",
-      "costo" : 0.0
-    }, {
-      "artista" : "Roger Taylor",
-      "rol" : "batería",
-      "costo" : 0.0
-    }, {
-      "artista" : "Elton John",
-      "rol" : "piano",
-      "costo" : 1200.0
-    }, {
-      "artista" : "George Michael",
-      "rol" : "guitarra eléctrica",
-      "costo" : 1500.0
-    }, {
-      "artista" : "Annie Lennox",
-      "rol" : "guitarra eléctrica",
-      "costo" : 675.0
-    } ],
-    "estado" : "completa",
-    "total" : 3775.0
+    "contratos" : [ ],
+    "estado" : "incompleta",
+    "total" : 0.0
   }, {
     "titulo" : "We Will Rock You",
-    "contratos" : [ {
-      "artista" : "Lisa Stansfield",
-      "rol" : "voz principal",
-      "costo" : 400.0
-    }, {
-      "artista" : "Annie Lennox",
-      "rol" : "guitarra eléctrica",
-      "costo" : 675.0
-    }, {
-      "artista" : "John Deacon",
-      "rol" : "bajo",
-      "costo" : 0.0
-    }, {
-      "artista" : "Roger Taylor",
-      "rol" : "batería",
-      "costo" : 0.0
-    } ],
-    "estado" : "completa",
-    "total" : 1075.0
+    "contratos" : [ ],
+    "estado" : "incompleta",
+    "total" : 0.0
   }, {
     "titulo" : "These Are the Days of Our Lives",
-    "contratos" : [ {
-      "artista" : "George Michael",
-      "rol" : "guitarra eléctrica",
-      "costo" : 1500.0
-    }, {
-      "artista" : "John Deacon",
-      "rol" : "bajo",
-      "costo" : 0.0
-    }, {
-      "artista" : "Roger Taylor",
-      "rol" : "batería",
-      "costo" : 0.0
-    }, {
-      "artista" : "Elton John",
-      "rol" : "voz principal",
-      "costo" : 1200.0
-    } ],
-    "estado" : "completa",
-    "total" : 2700.0
+    "contratos" : [ ],
+    "estado" : "incompleta",
+    "total" : 0.0
   }, {
     "titulo" : "Under Pressure",
-    "contratos" : [ {
-      "artista" : "George Michael",
-      "rol" : "guitarra eléctrica",
-      "costo" : 1500.0
-    }, {
-      "artista" : "David Bowie",
-      "rol" : "voz principal",
-      "costo" : 1500.0
-    }, {
-      "artista" : "John Deacon",
-      "rol" : "bajo",
-      "costo" : 0.0
-    }, {
-      "artista" : "Roger Taylor",
-      "rol" : "batería",
-      "costo" : 0.0
-    } ],
+    "contratos" : [ ],
     "estado" : "incompleta",
-    "total" : 3000.0
+    "total" : 0.0
   } ],
-  "totalRecital" : 10550.0
+  "totalRecital" : 0.0
 }

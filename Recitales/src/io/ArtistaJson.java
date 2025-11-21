@@ -57,6 +57,4 @@ public class ArtistaJson {
 		return "ArtistaJson [nombre=" + nombre + ", roles=" + roles + ", bandas=" + bandas + ", costo=" + costo
 				+ ", maxCanciones=" + maxCanciones + "]";
 	}
-
-	
 }

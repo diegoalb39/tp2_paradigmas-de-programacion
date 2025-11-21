@@ -32,7 +32,6 @@ public class JsonIO {
 		});
 	}
 
-	// print para exportar resultados, TODO testear
 	public static <T> void guardar(Path path, T objeto) throws IOException {
 		String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(objeto);
 		Files.writeString(path, json, StandardCharsets.UTF_8);
