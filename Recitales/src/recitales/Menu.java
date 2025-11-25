@@ -15,13 +15,20 @@ import io.ContratoOutJson;
 import io.JsonIO;
 import io.RecitalOutJson;
 
+import prolog.Prolog;
+import prolog.ArtistaData;
+import prolog.CancionData;
+
 public class Menu {
 	private Recital recital;
 	private Scanner scanner;
+	private Prolog p;
 
 	public Menu(Recital recital, Scanner scanner) {
 		this.recital = recital;
 		this.scanner = scanner;
+		this.p = new Prolog();
+		this.p.inicializarProlog();
 	}
 
 	public void mostrar() {
@@ -37,6 +44,7 @@ public class Menu {
 			System.out.println("7. Listar canciones con su estado");
 			System.out.println("8. Quitar artista del recital");
 			System.out.println("9. Mostrar historial de colaboraciones");
+			System.out.println("10. Entrenamientos minimos para cubrir todos los roles [Prolog]");
 			System.out.println("0. Salir");
 			System.out.println("==============================================");
 			System.out.print("Elija una opción: ");
@@ -64,7 +72,7 @@ public class Menu {
 				listarArtistasContratados();
 			}
 			case 7 -> {
-				listarCancionesConEstados();
+				listarCancionesConEstado();
 			}
 			case 8 -> {
 				opcionArrepentimientoPorIndice();
@@ -72,26 +80,29 @@ public class Menu {
 			case 9 -> {
 				mostrarGrafoColaboraciones();
 			}
+			case 10 -> {
+				calcularEntrenamientosMinimosProlog();
+			}
 			case 0 -> {
 				exportarRecital();
 				System.out.println("Saliendo del sistema...");
 			}
 			default -> System.out.println("Opción inválida");
 			}
-			
+
 			if (opcion != 0) {
-                System.out.println("\nPresione ENTER para continuar...");
-                scanner.nextLine(); 
-                limpiarPantalla();
-            }
+				System.out.println("\nPresione ENTER para continuar...");
+				scanner.nextLine();
+				limpiarPantalla();
+			}
 
 		} while (opcion != 0);
 	}
-	
+
 	static void limpiarPantalla() {
 		System.out.print("\033[H\033[2J");
-	    System.out.flush();
-    }
+		System.out.flush();
+	}
 
 	// PUNTO 1
 	public void rolesFaltantesParaUnaCancion() {
@@ -262,7 +273,7 @@ public class Menu {
 	}
 
 	// PUNTO 7
-	public void listarCancionesConEstados() {
+	public void listarCancionesConEstado() {
 		System.out.println("\n===== LISTA DE CANCIONES CON SU ESTADO =====");
 		System.out.printf("%-33s | %-10s | %-10s | %-30s%n", "CANCION", "ESTADO", "COSTO", "ROLES FALTANTES");
 		System.out
@@ -422,7 +433,7 @@ public class Menu {
 		out.totalRecital = totalRecital;
 		return out;
 	}
-
+	
 	public void exportarRecital() {
 		try {
 			RecitalOutJson dto = contruirRecitalOutDto(recital);
@@ -431,5 +442,16 @@ public class Menu {
 		} catch (IOException e) {
 			System.out.println("Error al generar recital-out.json");
 		}
+	}
+	
+	// PUNTO 10
+	private void calcularEntrenamientosMinimosProlog() {
+		System.out.println("\n===== Entrenamientos minimos para cubrir todos los roles =====");
+		
+		List<ArtistaData> artistasData = recital.obtenerDatosArtistasParaProlog();
+		List<CancionData> cancionesData = recital.obtenerDatosCancionesParaProlog();
+		
+		int entrenamientos = p.calcularMinimoEntrenamientos(artistasData, cancionesData);
+		System.out.printf("El mínimo de artistas a entrenar es: %d\n", entrenamientos);
 	}
 }

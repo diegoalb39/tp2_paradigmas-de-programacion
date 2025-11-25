@@ -9,6 +9,8 @@ import java.util.Map;
 import java.util.Set;
 import artistas.ArtistaInvitado;
 import artistas.Artista;
+import prolog.ArtistaData;
+import prolog.CancionData;
 
 public class Recital {
 	private String nombre;
@@ -82,7 +84,6 @@ public class Recital {
 			c.quitarContratosDe(artista);
 		}
 		artista.getContratos().clear();
-		artistas.remove(artista);
 	}
 
 	public List<Artista> artistasBaseLista() {
@@ -493,5 +494,40 @@ public class Recital {
 				}
 			}
 		}
+	}
+
+	public List<ArtistaData> obtenerDatosArtistasParaProlog() {
+		List<ArtistaData> dataList = new ArrayList<>();
+
+		for (Artista a : this.artistas) {
+			if (a.contratosvacio() || a.esBase()) {
+				String tipo = a.esBase() ? "base" : "no_base";
+				ArtistaData artData = new ArtistaData(a.getNombre(), tipo, a.getRoles(), a.getCostoBase());
+				dataList.add(artData);
+			}
+		}
+		return dataList;
+	}
+
+	public List<CancionData> obtenerDatosCancionesParaProlog() {
+		List<CancionData> dataList = new ArrayList<>();
+
+		for (Cancion c : this.canciones) {
+			Map<String, Integer> rolesFaltantes = c.rolesFaltantesConCantidad();
+			List<String> rolesRequeridosFaltantes = new ArrayList<>();
+
+			for (Map.Entry<String, Integer> rolfaltante : rolesFaltantes.entrySet()) {
+				String rol = rolfaltante.getKey();
+				int cantidad = rolfaltante.getValue();
+
+				for (int i = 0; i < cantidad; i++) {
+					rolesRequeridosFaltantes.add(rol);
+				}
+			}
+
+			CancionData data = new CancionData(c.getTitulo(), rolesRequeridosFaltantes);
+			dataList.add(data);
+		}
+		return dataList;
 	}
 }

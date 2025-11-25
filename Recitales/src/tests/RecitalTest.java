@@ -93,14 +93,14 @@ class RecitalTest {
 	}
 
 	@Test
-	void quitarArtistaDelRecitalRemueveContratosYDeLista() {
+	void quitarArtistaDelRecitalRemueveContratosYNoDeLista() {
 		assertTrue(recital.getArtistas().contains(cantanteBase));
 		assertFalse(cantanteBase.getContratos().isEmpty());
 		assertFalse(cancion1.getContratos().isEmpty());
 
 		recital.quitarArtistaDelRecital(cantanteBase);
 
-		assertFalse(recital.getArtistas().contains(cantanteBase));
+		assertTrue(recital.getArtistas().contains(cantanteBase));
 		assertTrue(cantanteBase.getContratos().isEmpty());
 
 		cancion1.getContratos().forEach(c -> assertNotEquals(cantanteBase, c.getArtista()));
